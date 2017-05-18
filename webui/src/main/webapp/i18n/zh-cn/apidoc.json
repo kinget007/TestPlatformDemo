@@ -1,0 +1,44 @@
+{
+    "onepassApp": {
+        "apiDoc" : {
+            "home": {
+                "title": "Api Docs",
+                "createLabel": "Create a new Api Info",
+                "createOrEditLabel": "Create or edit a Api Info",
+                "search": "Search for Api Info"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Api Info {{ id }}?"
+            },
+            "detail": {
+                "title": "Api Info"
+            },
+            "description": "Description",
+            "swaggerUri": "Swagger Uri",
+            "version": "Version",
+            "scheme": "Scheme",
+            "host": "Host",
+            "port": "Port",
+            "path": "Path",
+            "operation": "Operation",
+            "cookieParams": "Cookie Params",
+            "formParams": "Form Params",
+            "queryParams": "Query Params",
+            "pathParams": "Path Params",
+            "headParams": "Head Params",
+            "bodyParams": "Body Params",
+            "requestDesc": "Request Desc",
+            "responseDesc": "Response Desc",
+            "etc": "Etc",
+            "checks": "Checks",
+            "proxys": "Proxys"
+        }
+    },
+    "apimanageserviceApp": {
+        "apiInfo" : {
+            "created": "A new Api Info is created with identifier {{ param }}",
+            "updated": "A Api Info is updated with identifier {{ param }}",
+            "deleted": "A Api Info is deleted with identifier {{ param }}"
+        }
+    }
+}

@@ -1,0 +1,29 @@
+{
+    "onepassApp": {
+        "testSuit" : {
+            "home": {
+                "title": "Test Suits",
+                "createLabel": "Create a new Test Suit",
+                "createOrEditLabel": "Create or edit a Test Suit",
+                "search": "Search for Test Suit"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Test Suit {{ id }}?"
+            },
+            "detail": {
+                "title": "Test Suit"
+            },
+            "description": "Description",
+            "swaggerUri": "Swagger Uri",
+            "dependOn": "Depend On",
+            "etc": "Etc"
+        }
+    },
+    "apimanageserviceApp": {
+        "testSuit" : {
+            "created": "A new Test Suit is created with identifier {{ param }}",
+            "updated": "A Test Suit is updated with identifier {{ param }}",
+            "deleted": "A Test Suit is deleted with identifier {{ param }}"
+        }
+    }
+}

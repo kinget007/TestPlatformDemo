@@ -1,0 +1,48 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "urlJenkins",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "loginJenkins",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "pwdJenkins",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "publicFlag",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "userId",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "userName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "etc",
+            "fieldType": "String"
+        }
+    ],
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "server_jenkins",
+    "pagination": "pager",
+    "microserviceName": "jenkinsservice",
+    "searchEngine": false
+}

@@ -1,0 +1,17 @@
+version: '2'
+services:
+    auth-mongodb:
+        container_name: auth-mongodb
+        image: mongo:3.2.10
+        ports:
+            - "27017:27017"
+        command: mongos --configdb auth-mongodb-config
+    auth-mongodb-node:
+        build:
+            context: .
+            dockerfile: mongodb/MongoDB.Dockerfile
+        command: mongod --replSet rs1 --noprealloc --smallfiles
+    auth-mongodb-config:
+        image: mongo:3.2.10
+        container_name: auth-mongodb-config
+        command: mongod --noprealloc --smallfiles --configsvr --dbpath /data/db

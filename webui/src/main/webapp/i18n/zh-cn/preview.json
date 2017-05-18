@@ -1,0 +1,16 @@
+{
+    "onePassApp": {
+        "preview" : {
+            "home": {
+                "title": "日报预览"
+            },
+            "email":{
+                "title":"发送邮件",
+                "senderEmail":"发件人邮箱",
+                "senderPwd":"发件人密码",
+                "emailGroup":"邮件组选择",
+                "action" :"发送"
+            }
+        }
+    }
+}

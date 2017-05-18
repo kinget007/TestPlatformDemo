@@ -1,0 +1,19 @@
+{
+    "home": {
+        "title": "Welcome Come to OnePass!",
+        "subtitle": "This is your homepage",
+        "logged": {
+            "message": "You are logged in as user \"{{username}}\"."
+        },
+        "question": "If you have any question on OnePass:",
+        "link": {
+            "homepage": "OnePass homepage",
+            "stackoverflow": "OnePass on Stack Overflow",
+            "bugtracker": "OnePass bug tracker",
+            "chat": "OnePass public chat room",
+            "follow": "follow @java_hipster on Twitter"
+        },
+        "like": "If you like OnePass, don't forget to give us a star on",
+        "github": "GitHub"
+    }
+}

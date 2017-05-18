@@ -1,0 +1,28 @@
+{
+    "onePassApp": {
+        "taskInProject" : {
+            "home": {
+                "title": "任务分配",
+                "createLabel": "添加一个新的任务",
+                "createOrEditLabel": "添加或者修改任务信息",
+                "search": "检索任务"
+            },
+            "created": "新的任务信息添加成功 {{ param }}",
+            "updated": "新的任务信息更新成功 {{ param }}",
+            "deleted": "新的任务信息删除成功 {{ param }}",
+            "delete": {
+                "question": "是否确定删除该任务信息 {{ id }}?"
+            },
+            "detail": {
+                "title": "任务分配"
+            },
+            "description": "描述信息",
+            "progress": "任务进度",
+            "deadLine": "截止日期",
+            "date": "更新日期",
+            "projectId": "项目标识",
+            "userId": "用户标识",
+            "etc": "其他"
+        }
+    }
+}

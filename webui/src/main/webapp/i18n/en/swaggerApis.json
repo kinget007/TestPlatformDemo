@@ -1,0 +1,28 @@
+{
+    "onepassApp": {
+        "swaggerApis" : {
+            "home": {
+                "title": "Swagger Apis",
+                "createLabel": "Create a new Swagger Apis",
+                "createOrEditLabel": "Create or edit a Swagger Apis",
+                "search": "Search for Swagger Apis"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Swagger Apis {{ id }}?"
+            },
+            "detail": {
+                "title": "Swagger Apis"
+            },
+            "description": "Description",
+            "serviceUri": "Service Uri",
+            "etc": "Etc"
+        }
+    },
+    "apimanageserviceApp": {
+        "swaggerApis" : {
+            "created": "A new Swagger Apis is created with identifier {{ param }}",
+            "updated": "A Swagger Apis is updated with identifier {{ param }}",
+            "deleted": "A Swagger Apis is deleted with identifier {{ param }}"
+        }
+    }
+}

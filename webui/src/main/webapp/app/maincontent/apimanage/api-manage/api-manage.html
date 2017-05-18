@@ -1,0 +1,1759 @@
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-2">
+            <div class="dropdown rf-dropdown">
+                <button class="btn btn-default" type="button" data-toggle="dropdown">
+                    <span class='glyphicon glyphicon-align-justify'></span>
+                </button>
+                <ul class="dropdown-menu rf-menu-width">
+                    <li><a data-toggle="modal" data-target="#workspaceModal">New Workspace</a></li>
+                    <li><a id="switchWorkSpace" class="dummySwitchWorkspace">Switch Workspace</a></li>
+                    <li class="divider"></li>
+                    <li><a data-toggle="modal" data-target="#projectModal">New Project</a></li>
+                    <li class="divider"></li>
+                    <li><a data-toggle="modal" id="manageEnvironments" data-target="#manageEnvironmentsModal">Manage
+                        Environments</a></li>
+                    <li class="divider"></li>
+                    <li><a data-toggle="modal" id="globalSettings" data-target="#globalSettingsModal">Global
+                        Settings</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <!--<div id="rf-col-1-body">-->
+            <!--<label>WorkSpaces</label>-->
+            <select class="form-control" style="width: 100%;"
+                    ng-model="workspaceId"
+                    ng-options="workspace.id as workspace.name for workspace in vm.workspaces">
+                <option value="">-- 请选择 --</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <div ng-repeat="workspace in vm.workspaces | filter:{id:workspaceId}">
+                <!--<label>Projects</label>-->
+                <select class="form-control" style="width: 100%;"
+                        ng-model="projectId"
+                        ng-options="project.id as project.name for project in workspace.projects">
+                    <option value="">-- 请选择 --</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <!--<label>Tags</label>-->
+            <select class="form-control" style="width: 100%;"
+                    ng-model="apiTagId"
+                    ng-options="apiTag.id as apiTag.name for apiTag in vm.apiTags">
+                <option value="">-- 请选择 --</option>
+            </select>
+        </div>
+        <div class="col-md-12">
+            <h2></h2>
+        </div>
+    </div>
+
+
+    <div class="row">
+
+        <div class="col-md-5">
+            <div class="btn-group" id="newRequestDropdown">
+                <button class="btn btn-default btn-sm" data-toggle="modal" id="requestBtn">New Request</button>
+                <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown">
+                    <span class="caret"></span> <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu pull-right">
+                    <li><a class="btn-sm" data-toggle="modal" data-target="#folderModal">New Folder</a></li>
+                    <li class="divider"></li>
+                    <li><a class="rf-font-12" data-toggle="modal" data-target="#socketModal">New Socket</a></li>
+                    <li class="divider"></li>
+                    <li><a class="btn-sm" data-toggle="modal" data-target="#entityModal">New Entity</a></li>
+                </ul>
+            </div>
+            &nbsp;
+            <div class="btn-group">
+                <button class="btn btn-default btn-sm run-project" data-toggle="tooltip" data-placement="bottom"
+                        data-container="body" title="Run project lets you run requests together.">Run Project
+                </button>
+            </div>
+            &nbsp;
+            <div class="btn-group" id="sortOptionsDropdown">
+                <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+                    Sort&nbsp;&nbsp;<span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu pull-right">
+                    <li><a class="rf-font-12" data-toggle="modal" id="sortByName">Sort by Name ASC</a></li>
+                    <li><a class="rf-font-12" data-toggle="modal" id="sortByNameDesc">Sort by Name DESC</a></li>
+                    <li><a class="rf-font-12" data-toggle="modal" id="sortByLastRun">Sort by Last Run ASC</a></li>
+                    <li><a class="rf-font-12" data-toggle="modal" id="sortByLastRunDesc">Sort by Last Run DESC</a></li>
+                    <li><a class="rf-font-12" data-toggle="modal" id="sortByLastModified">Sort by Last Modified ASC</a>
+                    </li>
+                    <li><a class="rf-font-12" data-toggle="modal" id="sortByLastModifiedDesc">Sort by Last Modified
+                        DESC</a></li>
+                </ul>
+            </div>
+            &nbsp;
+            <div class="btn-group" id="moreOptionsDropdown">
+                <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+                    More&nbsp;&nbsp;<span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu pull-right">
+                    <li><a class="rf-font-12" data-toggle="modal" id="expandAllNodes">Expand All</a></li>
+                    <li><a class="rf-font-12" data-toggle="modal" id="collapseAllNodes">Collapse All</a></li>
+                    <li class="divider"></li>
+                    <li><a class="rf-font-12 socket-connector">Socket</a></li>
+                    <li class="divider"></li>
+                    <li><a class="rf-font-12" id="editNodeMenuItem">Edit Node</a></li>
+                    <li><a class="rf-font-12" data-toggle="modal" data-target="#deleteNodeModal">Delete Node</a></li>
+                    <li class="divider"></li>
+                    <li><a class="rf-font-12" data-toggle="modal" data-target="#importModal">Import</a></li>
+                    <li class="divider"></li>
+                    <li><a class="rf-font-12" data-toggle="tooltip" data-placement="bottom" data-container="body"
+                           title="Flat View shows requests only.">Flat View</a></li>
+                    <li><a class="rf-font-12" data-toggle="tooltip" data-placement="bottom" data-container="body"
+                           title="Tree View shows tree structure of project.">Tree View</a></li>
+                </ul>
+            </div>
+            &nbsp;
+            <div class="btn-group">
+                <button type="button" class="btn btn-default btn-sm">Mic</button>
+                <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+                    <span class="caret"></span> <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li class="list-view-menu-item starred"><a href="/#/api-manage#/starred"><span
+                        class="glyphicon glyphicon-star"></span>&nbsp;&nbsp;Starred</a></li>
+                    <li class="list-view-menu-item history"><a href="/#/api-manage#/activityLog"><span
+                        class="glyphicon glyphicon-time"></span>&nbsp;&nbsp;Activity Log
+                    </a></li>
+                    <li><a href="/#/api-manage#" data-toggle="modal" data-target="#globalSettingsModal"> <span
+                        class="glyphicon glyphicon-wrench"></span>&nbsp;&nbsp; Settings
+                    </a></li>
+                </ul>
+            </div>
+            &nbsp;
+
+            <div class="btn-group" id="searchBox">
+                <div class="input-group stylish-input-group">
+                    <input type="text" class="form-control" placeholder="Search" id="search">
+                    <span class="input-group-addon">
+	             <button id="searchbtn" type="submit">
+	                 <span class="glyphicon glyphicon-search"></span>
+	             </button>
+	         </span>
+                </div>
+            </div>
+
+            <!--{{ vm.workspacesNodesStarreds }}-->
+            <ul>
+                <li ng-repeat="node in vm.workspacesNodesStarreds">{{node.name}}
+                    <!--<a class="list-group-item" title={{node.apiURL}}>-->
+                        <!--<span class="{{node.className}}">{{node.methodType}}</span>&nbsp;&nbsp;{{node.name}}-->
+                        <!--<div><span>&nbsp;&nbsp;{{node.time}}</span><span>&nbsp;{{node.runBy}}</span></div>-->
+                    <!--</a>-->
+                </li>
+            </ul>
+
+            <ul class="nav nav-pills nav-stacked rf-left-nav" id="tagged-items">
+                <!--<a href="#" class="list-group-item" data-node-id=<@=node.id@> data-tag-node-id=<@=node.id@> data-toggle="tooltip"-->
+                    <!--data-placement="bottom" title=<@=node.apiURL@>>-->
+                    <!--<span class="<@=node.className@>"><@=node.methodType@></span>&nbsp;&nbsp;<@=node.name@>-->
+                    <!--<div><span>&nbsp;&nbsp;<@=node.time@></span><span>&nbsp;<@=node.runBy@></span></div>-->
+                <!--</a>-->
+
+            </ul>
+
+            <ul class="nav nav-pills nav-stacked rf-left-nav" id="history-items">
+                <!--<a href="#" class="list-group-item" data-history-id=<@=conversation.id@> data-history-ref-id=<@=conversation.id@>-->
+                    <!--data-toggle="tooltip" data-placement="bottom" title=<@=conversation.rfRequestDTO.apiUrl@> >-->
+                    <!--<div class="<@=conversation.className@>"><@=conversation.rfRequestDTO.methodType@></div>-->
+                    <!--<@ if (conversation.name == null || conversation.name == "" ) { @>-->
+                    <!--<div class="activity"><@=conversation.rfRequestDTO.apiUrl@></div>-->
+                    <!--<@ } else { @>-->
+                    <!--<div class="activity"><@=conversation.name@></div>-->
+                    <!--<@ } @>-->
+
+                    <!--<span><@=conversation.time@></span><span>&nbsp;<@=conversation.runBy@></span>-->
+                <!--</a>-->
+
+            </ul>
+
+            <div id="tree" class="fancytree-colorize-hover">
+                <ul >
+                    <li ng-repeat="project in vm.DocumentationProjectsByWorkspaceId">{{project.id }}-{{ project.name  }}</li>
+                </ul>
+            </div>
+            <br><br>
+        </div>
+
+        <div class="col-md-7">
+            <div id="projectRunnerSection">
+                <div id="projectRunnerHeader">
+                    <br>
+                    <button class="btn btn-primary btn-sm" id="exportRunProjectReport">Export Report</button>
+                    <input type="hidden" class="form-control" id="typeRun" name="" value=""/>
+                    <br>
+                    <br>
+                </div>
+                <!--<div id="loading">-->
+                <!--Loading-->
+                <!--<i class="fa fa-cog fa-spin" title="Loading"></i>-->
+                <!--</div>-->
+                <div>
+                    <ul class="nav nav-pills nav-stacked" id="projectRunnerBody"></ul>
+                </div>
+            </div>
+            <div class="form-group" id="conversationSection">
+                <div id="conversationHeader">
+                    <br>
+                    <div class="btn-group">
+                        <button class="btn btn-primary btn-sm" id="run">Run</button>
+                        <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
+                            <span class="caret"></span> <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" class="btn-sm" data-toggle="modal" data-target="#comingSoon">Save and
+                                Run</a></li>
+                        </ul>
+                    </div>
+                    &nbsp;&nbsp;
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default btn-sm" data-toggle="modal"
+                                id="saveConversationBtn">Save
+                        </button>
+                        <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+                            <span class="caret"></span> <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" class="btn-sm" data-toggle="modal" id="saveAsConversationBtn">Save As</a>
+                            </li>
+                        </ul>
+                    </div>
+                    &nbsp;&nbsp;
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default btn-sm" data-toggle="modal"
+                                data-target="#assertsModal" id="manageAsserts">Asserts <span id="assertCount"
+                                                                                             class="badge">0</span>
+                        </button>
+                        <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+                            <span class="caret"></span> <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" class="btn-sm" id="showLastResponse">View Previous Results</a></li>
+                        </ul>
+                    </div>
+                    &nbsp;&nbsp;
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default btn-sm" id="clearRequest">Clear</button>
+                        <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+                            <span class="caret"></span> <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" class="btn-sm" id="clearBody">Clear Body</a></li>
+                            <li><a href="#" class="btn-sm" id="clearHeader">Clear Header</a></li>
+                            <li><a href="#" class="btn-sm" id="clearCookie">Clear Cookie</a></li>
+                            <li><a href="#" class="btn-sm" id="clearAuth">Clear Auth</a></li>
+                        </ul>
+                    </div>
+                    &nbsp;&nbsp;
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+                            More&nbsp;&nbsp;<span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li class="copyResponseList"><a href="#" class="btn-sm" id="copyResponse"
+                                                            data-toggle="tooltip" data-placement="top"
+                                                            data-container="body" title=""
+                                                            data-original-title="Copy the response content.">Copy
+                                Response</a></li>
+                            <li><a href="#" class="btn-sm" id="showLastResponse">Show Last Response</a></li>
+                        </ul>
+                    </div>
+                    &nbsp;&nbsp;&nbsp;
+                    <button id="starNodeBtn" class="btn btn-default btn-sm">
+                        <span class="glyphicon glyphicon-star"></span>&nbsp;Star
+                    </button>
+                    <!--<button class="btn btn-default btn-sm pull-right right-pannel-toggle-btn" data-toggle="tooltip"-->
+                    <!--data-placement="left">-->
+                    <!--<i id="full-screen-icon" class="fa fa-arrows-alt"></i>-->
+                    <!--</button>-->
+                    <!--    <button class="btn btn-default btn-sm pull-right header-toggle-btn" data-toggle="tooltip" data-placement="left">
+                           <i id="header-toggle-icon" class="fa fa-angle-double-up"></i>
+                       </button> -->
+                    <br> <br>
+                </div>
+                <!--<div id="loadingRequest">-->
+                <!--Loading-->
+                <!--<i class="fa fa-cog fa-spin" title="Loading"></i>-->
+                <!--</div>-->
+                <div id="conversationBody">
+                    <div>
+                        <div>
+                            <p class="apiRequestContainer">
+                                <input type="hidden" id="apiReqNodeId">
+                                <input type="hidden" id="rfRequestId">
+                                <span id="requestToggle" class='glyphicon glyphicon glyphicon-chevron-down'></span>&nbsp;&nbsp;<input
+                                id="apiRequestNameTextBox"></input><span id="apiRequestName"></span>
+                            </p>
+                        </div>
+                        <div id="requestContainer">
+                            <p id="apiRequestDescription"></p>
+                            <div class="btn-group label-btn-group">
+                                <input type="hidden" id="currentStaredNode">
+                                <button type="button" class="btn btn-default btn-sm dropdown-toggle"
+                                        data-toggle="dropdown">
+                                    <span class="glyphicon glyphicon-tags"></span> &nbsp;Tags&nbsp;<span
+                                    class="caret"></span> <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <ul class="dropdown-menu label-dropdown-menu">
+
+                                </ul>
+                            </div>
+                            <div id="tagLabels"></div>
+
+                            <br>
+                            <br>
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-xs-2 rf-col-xs-2-padding">
+                                        <select class="apiRequestType form-control">
+                                            <option selected>GET</option>
+                                            <option>POST</option>
+                                            <option>PUT</option>
+                                            <option>DELETE</option>
+                                            <option>HEAD</option>
+                                            <option>OPTIONS</option>
+                                            <option>TRACE</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-xs-10 rf-col-xs-10-padding">
+                                        <input type="text" class="form-control typeahead" id="apiUrl"
+                                               placeholder="Enter URL">
+                                        <input type="hidden" id="evaluatedApiUrl"> <br> <br>
+                                    </div>
+                                </div>
+                            </div>
+                            <ul class="nav nav-tabs reponse-pannel-ul">
+                                <li class="active"><a href="/#/api-manage#tab-body" data-toggle="tab">Raw</a></li>
+                                <li><a href="/#/api-manage#tab-form" data-toggle="tab">Form</a></li>
+                                <li><a href="/#/api-manage#tab-file" data-toggle="tab">Files</a></li>
+                                <li><a href="/#/api-manage#tab-query" data-toggle="tab">Query</a></li>
+                                <li><a href="/#/api-manage#tab-header" data-toggle="tab">Header</a></li>
+                                <!-- <li><a href="#tab-cookie" data-toggle="tab">Cookie</a></li> -->
+                                <li><a href="/#/api-manage#tab-auth" data-toggle="tab">Auth</a></li>
+                            </ul>
+                            <!-- Tab panes -->
+                            <div class="tab-content reponse-pannel">
+                                <div class="tab-pane active" id="tab-body">
+                                    <br>
+                                    <!-- <div class="btn-group">
+                                        <button class="btn btn-default btn-sm">raw</button>
+                                        <button class="btn btn-default btn-sm">form</button>
+                                        <button class="btn btn-default btn-sm">files</button>
+                                    </div>
+                                    <br>
+                                    <br> -->
+                                    <textarea id="apiBody" class="form-control"></textarea>
+                                </div>
+
+                                <div class="tab-pane" id="tab-form">
+                                    <br>
+                                    <p>
+                                        <button type="button" class="btn btn-default btn-sm" id="addFormDataBtn">Add
+                                            Form Data
+                                        </button>
+                                    </p>
+                                    <div id="formDataWrapper">
+                                    </div>
+                                </div>
+
+                                <div class="tab-pane" id="tab-file">
+                                    <br>
+                                    <p>
+                                        <button type="button" class="btn btn-default btn-sm" id="addFileDataBtn">Add
+                                            File Data
+                                        </button>
+                                    </p>
+                                    <div id="fileDataWrapper">
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="tab-query">
+                                    <br>
+                                    <p>
+                                        <button type="button" class="btn btn-default btn-sm" id="addQueryParamBtn">Add
+                                            Query Param
+                                        </button>
+                                    </p>
+                                    <div id="queryParamsWrapper">
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="tab-header">
+                                    <br>
+                                    <!-- <p><span>Content-Type</span> : <span>application/json</span></p> -->
+                                    <p>
+                                        <button type="button" class="btn btn-default btn-sm" id="addHeaderBtn">Add
+                                            Header
+                                        </button>
+                                    </p>
+                                    <div id="headersWrapper">
+                                    </div>
+                                </div>
+                                <!--
+                                <div class="tab-pane" id="tab-cookie">
+                                    <br>
+                                    <p></p>
+                                </div>
+                            -->
+                                <div class="tab-pane" id="tab-auth">
+                                    <br>
+                                    <p>
+                                        <input type="hidden" name="authOptionSelected" id="authOptionSelected"/>
+                                    <div class="btn-group" data-toggle="buttons" id="authRadioOptions">
+                                        <label class="btn btn-primary btn-sm">
+                                            <input type="radio" name="authOptions" id="option1" value="basic"/> Basic
+                                        </label>
+                                        <label class="btn btn-primary btn-sm">
+                                            <input type="radio" name="authOptions" id="option2" value="digest"/> Digest
+                                        </label>
+                                        <label class="btn btn-primary btn-sm">
+                                            <input type="radio" name="authOptions" id="option3" value="oauth2"/> OAuth 2
+                                        </label>
+                                    </div>
+                                    <!--<button class="btn btn-primary" id="noAuth">No Auth</button>   -->
+                                    </p>
+                                    <div id="authWrapper">
+                                    </div>
+
+                                    <div class="tab-pane authFields" id="tab-basic-auth">
+                                        <br>
+                                        <div class="row">
+                                            <div class="col-xs-6">
+                                                <input type="text" class="form-control" id="bAuthUsername"
+                                                       placeholder="Enter Username">
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <input type="text" class="form-control" id="bAuthPassword"
+                                                       placeholder="Enter Password">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane authFields" id="tab-digest-auth">
+                                        <br>
+                                        <div class="row">
+                                            <div class="col-xs-6">
+                                                <input type="text" class="form-control" id="digestUsername"
+                                                       placeholder="Enter Username">
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <input type="text" class="form-control" id="digestPassword"
+                                                       placeholder="Enter Password">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="tab-pane" id="tab-oauth1">
+                                         <br>
+                                         <br>
+                                         <br>
+                                         <p></p>
+                                     </div>-->
+                                    <div class="tab-pane authFields" id="tab-oauth2">
+                                        <span id="fetchedAccessToken"></span>
+                                        <br>
+                                        <div id="oauth2Wrapper">
+                                        </div>
+                                        <br>
+                                        <div><input type="text" class="form-control" id="oauthName"
+                                                    placeholder="Enter Name"></div>
+                                        <br>
+                                        <div><input type="text" class="form-control" id="authorizationUrl"
+                                                    placeholder="Enter Authorization Endpoint"></div>
+                                        <br>
+                                        <div><input type="text" class="form-control" id="accessTokenUrl"
+                                                    placeholder="Enter Access Token Endpoint"></div>
+                                        <br>
+                                        <div><input type="text" class="form-control" id="clientId"
+                                                    placeholder="Enter Client ID"></div>
+                                        <br>
+                                        <div><input type="text" class="form-control" placeholder="Enter Client Secret">
+                                        </div>
+                                        <br>
+                                        <div><input type="text" class="form-control" id="authScopes"
+                                                    placeholder="Enter Scope"></div>
+                                        <br>
+                                        <div class="row">
+                                            <div class="col-xs-6">
+                                                <select class="form-control" id="accessTokenLocation">
+                                                    <option>Select Access Token Location</option>
+                                                    <option value="HEADER_BEARER">Auth Header With Bearer Prefix
+                                                    </option>
+                                                    <option value="HEADER_TOKEN">Auth Header With OAuth Prefix</option>
+                                                    <option value="URL_PARAM_ACCESS_TOKEN">URL Parameter with
+                                                        access_token
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div class="col-xs-3">
+                                                <button id="accessTokenBtn" class="btn btn-default">Get Access Token
+                                                </button>
+                                            </div>
+                                            <div class="col-xs-3" id="saveAuth">
+                                                <button id="saveOAuthBtn" class="btn btn-default">Save</button>
+                                            </div>
+                                        </div>
+                                        <br>
+
+                                        <br>
+                                        <p></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div>
+                        <div class="clearfix">
+                            <p>
+                                <span id="responseToggle" class='glyphicon glyphicon glyphicon-chevron-down'></span>&nbsp;&nbsp;<b>Response</b>
+                            <div class="pull-right">&nbsp;&nbsp;<span>Status : </span><span id="status-code"></span>&nbsp;&nbsp;<span>Time : <span
+                                id="req-time"></span> ms</span>&nbsp;&nbsp;<span>Size : <span
+                                id="content-size"></span> Bytes</span></div>
+                            </p>
+                        </div>
+
+                        <div id="responseContainer">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a href="/#/api-manage#res-tab-body" data-toggle="tab">Body</a></li>
+                                <li><a href="/#/api-manage#res-tab-preview" data-toggle="tab">Preview</a></li>
+                                <li><a href="/#/api-manage#res-tab-header" data-toggle="tab">Header</a></li>
+                                <li><a href="/#/api-manage#res-tab-assert" data-toggle="tab">Asserts <span
+                                    id="assertResultCount"
+                                    class="badge">0/0</span></a>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="res-tab-body">
+                                    <br>
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div id="response-wrapper"></div>
+                                        </div>
+                                    </div>
+                                    <br><br>
+                                </div>
+                                <div class="tab-pane" id="res-tab-preview">
+                                    <br>
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <iframe id="response-preview"></iframe>
+                                        </div>
+                                    </div>
+                                    <br><br>
+                                </div>
+                                <div class="tab-pane" id="res-tab-header">
+                                    <div><br>
+                                        <table id="res-header-wrapper" class="table">
+                                        </table>
+                                    </div>
+                                    <br><br>
+                                </div>
+                                <div class="tab-pane" id="res-tab-assert">
+                                    <div><br>
+                                        <p>
+                                        <div class="success-icon circle"></div>
+                                        <span>0</span> Success&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <div class="failure-icon circle"></div>
+                                        <span>0</span> Failure</p>
+                                        <table id="res-assert-wrapper" class="table">
+                                            <thead>
+                                            <tr>
+                                                <th>Status</th>
+                                                <th>Expression</th>
+                                                <th>Comparator</th>
+                                                <th>Expected</th>
+                                                <th>Actual</th>
+                                            <tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                    <br><br>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="webSocketSection">
+                <br>
+                <div id="webSocketRequest">
+                    <input type="hidden" id="socketNodeId">
+                    <p>
+                        <span id="socketName">Socket Name</span><input id="socketNameTextBox">
+                    </p>
+                    <p>
+                        <span id="socketDescription">Socket Description</span>
+                    </p>
+                    <br>
+                    <p>
+                        <input type="text" class="form-control" id="secketUrl" placeholder="Enter URL">
+                    </p>
+                    <p>
+                        <button class="btn btn-primary btn-sm" id="btnConnectSocket">Connect</button>
+                        &nbsp;&nbsp;&nbsp;
+                        <button class="btn btn-default btn-sm" id="btnDisconnectSocket">Disconnect</button>
+                    </p>
+                    <br>
+                    <p>
+                        <textarea id="socketMessage" class="form-control" placeholder="Enter Message"></textarea>
+                    </p>
+                    <p>
+                        <button class="btn btn-primary btn-sm" id="btnSendMessage">Send</button>
+                    </p>
+                </div>
+                <hr>
+                <div id="webSocketResponse">
+                    <p>
+                        <span><b>Message Log</b></span>
+                    </p>
+                    <div id="webSocketResponseBody">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- <jsp:include page="popup.jsp"></jsp:include> -->
+<!-- Modals -->
+<div class="modal fade" id="assertsModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Manage Asserts</h4>
+            </div>
+            <div class="modal-body">
+                <div id="manageAssertsWrapper">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="saveAssertsBtn">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="assertsPreviousModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">View Previous Assert Results</h4>
+            </div>
+            <div class="modal-body" id="prev-res-tab-assert">
+                <table id="prev-res-assert-wrapper" class="table">
+                    <thead>
+                    <tr>
+                        <th>Status</th>
+                        <th>Expression</th>
+                        <th>Comparator</th>
+                        <th>Expected</th>
+                        <th>Actual</th>
+                    <tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="entityModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">New Entity</h4>
+            </div>
+            <div class="modal-body">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+                        Predefined Entity&nbsp;&nbsp;<span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="rf-font-12" data-toggle="modal" data-target="#createUserModal">User Entity</a>
+                        </li>
+                        <li><a class="rf-font-12" data-toggle="modal" data-target="#createRoleModal">Role Entity</a>
+                        </li>
+                    </ul>
+                </div>
+                <br> <br>
+                <form id="createNewEntityForm">
+                    <input type="text" id="newEntityName" class="form-control" placeholder="Enter Entity Name"
+                           name="entityName" required>
+                    <p class="text-danger" id="new-entity-error"></p>
+                    <br>
+                    <textarea id="newEntityDescription" class="form-control" rows="3"
+                              placeholder="Enter Description"></textarea>
+                    <br>
+                    <p>
+                        <button type="button" class="btn btn-default btn-sm" id="addEntityFieldBtn">Add Field</button>
+                    </p>
+                    <div id="entityFieldsWrapper">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="createNewEntityBtn">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="createUserModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Create User Entity</h4>
+            </div>
+
+            <div class="modal-body">
+                This will create system defined entity User. Are you sure you want to create?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-primary" id="createUserEntity">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="createRoleModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Create Role Entity</h4>
+            </div>
+
+            <div class="modal-body">
+                This will create system defined entity Role. Are you sure you want to create?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-primary" id="createRoleEntity">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="folderModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">New Folder</h4>
+            </div>
+
+            <div class="modal-body">
+                <form id="newFolderCreationForm">
+                    <input type="text" id="folderId" class="form-control" placeholder="Enter Folder Name"
+                           name="folderName" required><br>
+                    <textarea id="folderTextArea" class="form-control" rows="3"
+                              placeholder="Enter Description"></textarea>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="createNewFolderBtn">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="requestModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">New Request</h4>
+            </div>
+            <input type="hidden" class="form-control" id="source"/>
+            <div class="modal-body">
+                <div class="form-group">
+                    <form id="newRequestForm">
+                        <input class="form-control" id="requestName" placeholder="Enter Request Name"
+                               name="newRequestName" required/><br>
+                        <textarea id="requestTextArea" class="form-control" rows="3"
+                                  placeholder="Enter Description"></textarea>
+                    </form>
+                </div>
+                <!--
+                 <div class="form-group">
+                    <label for="requestUrl">API End Point</label>
+                    <input class="form-control" id="requestUrl" placeholder="http://example.com/api/v1/users">
+                </div> -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="createNewRequestBtn">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="socketModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">New Socket</h4>
+            </div>
+            <input type="hidden" class="form-control" id="socketSource">
+            <div class="modal-body">
+                <form id="newSocketForm">
+                    <div class="form-group">
+                        <input class="form-control" id="newSocketName" placeholder="Enter Socket Name"
+                               name="newSocketName" required/> <br>
+                        <textarea class="form-control" id="socketTextArea" rows="3"
+                                  placeholder="Enter Description"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="createNewSocketBtn">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="updateProfileModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Update Profile</h4>
+            </div>
+            <div class="modal-body">
+                <input type="text" id="updateProfileName" class="form-control" placeholder="Enter Name"> <br>
+                <input type="text" id="updateProfileEmail" class="form-control" placeholder="Enter Email"> <br>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="updateProfileBtn">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="changePasswordModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Change Password</h4>
+            </div>
+            <div class="modal-body">
+                <input type="text" id="oldPassword" class="form-control" placeholder="Enter Old Password"> <br>
+                <input type="password" id="newPassword" class="form-control" placeholder="Enter New Password"> <br>
+                <input type="password" id="retypedPassword" class="form-control" placeholder="Retype New Password"> <br>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="changePasswordBtn">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="workspaceModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="workspaceModalLabel">New Workspace</h4>
+            </div>
+            <div class="modal-body">
+                <form id="workspaceForm">
+                    <input type="text" id="workspaceTextField" class="form-control" name="workspaceName"
+                           placeholder="Enter Workspace Name" required>
+                    <p class="text-danger" id="workspace-error"></p> <br>
+                    <textarea id="workspaceTextArea" class="form-control" rows="3"
+                              placeholder="Enter Description"></textarea>
+                    <br>
+                </form>
+                <!--
+                <div>
+                    <label class="radio-inline"> <input type="radio" name="workspaceRadioOptions" id="privateWorkspace" value="private"><span>&nbsp;Private</span>
+                    </label> <label class="radio-inline"> <input type="radio" name="workspaceRadioOptions" id="restrictedWorkspace" value="restricted"
+                        checked="checked">&nbsp;Restricted
+                    </label> <label class="radio-inline"> <input type="radio" name="workspaceRadioOptions" id="publicWorkspace" value="public">&nbsp;Public
+                    </label>
+                </div>
+                <br> <input type="text" id="workspace-share-tags" class="demo-default" value="Core Engg Team, QA Team, Ranjan">
+            -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id="saveWorkspaceBtn" type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="projectModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="projectModalLabel">New Project</h4>
+            </div>
+            <div class="modal-body">
+                <form id="projectCreationForm">
+                    <input type="text" id="projectTextField" class="form-control" name="projectName"
+                           placeholder="Enter Project Name" required>
+                    <p class="text-danger" id="project-error"></p> <br>
+                    <textarea id="projectTextArea" class="form-control" rows="3"
+                              placeholder="Enter Description"></textarea>
+                    <br>
+                </form>
+                <!--
+                <div>
+                    <label class="radio-inline"> <input type="radio" name="projectRadioOptions" id="privateProject" value="private"><span>&nbsp;Private</span>
+                    </label> <label class="radio-inline"> <input type="radio" name="projectRadioOptions" id="restrictedProject" value="restricted" checked="checked">&nbsp;Restricted
+                    </label><label class="radio-inline"> <input type="radio" name="projectRadioOptions" id="publicProject" value="public">&nbsp;Public
+                    </label>
+                </div>
+                <br> <input type="text" id="project-share-tags" class="demo-default" value="Core Engg Team, QA Team, Ranjan">
+            -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id="saveProjectBtn" type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="importModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Import</h4>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-info">
+                    Support for RAML file type will be added soon!
+                </div>
+                <br>
+                <input type="file" name="file" id="importFileId" class="form-control">
+                <br>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id="importRfFileBtn" type="button" class="btn btn-primary">Import RESTFiddle</button>
+                <button id="importSwaggerFileBtn" type="button" class="btn">Swagger</button>
+                <button id="importPostmanFileBtn" type="button" class="btn">Postman</button>
+                <button id="importRamlFileBtn" type="button" class="btn">RAML</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="manageEnvironmentsModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Manage Environments</h4>
+            </div>
+            <div class="modal-body">
+                <form id="environmentManagementForm">
+                    <div id="manageEnvironmentWrapper">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id="saveEnvironmentBtn" type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="tagModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="tagModalLabel">New Tag</h4>
+            </div>
+            <div class="modal-body">
+                <form id="tagForm">
+                    <input type="text" id="tagTextField" class="form-control" name="tagName"
+                           placeholder="Enter Tag Name" required> <br>
+                    <textarea id="tagTextArea" class="form-control" rows="3" placeholder="Enter Description"></textarea>
+                    <br>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id="saveTagBtn" type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="editNodeModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="editNodeModalLabel">Edit Node</h4>
+            </div>
+            <div class="modal-body">
+                <form id="editNodeForm">
+                    <input type="hidden" id="editNodeId"/>
+                    <input type="text" id="editNodeTextField" class="form-control" placeholder="Enter Node Name"
+                           name="editNodeName" required> <br>
+                    <textarea id="editNodeTextArea" class="form-control" rows="3"
+                              placeholder="Enter Description"></textarea>
+                    <br>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id="editNodeBtn" type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="editEntityModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="editNodeModalLabel">Edit Entity</h4>
+            </div>
+            <div class="modal-body">
+                <form id="editNodeForm">
+                    <input type="hidden" id="editEntityNodeId"/>
+                    <input type="hidden" id="editEntityId"/>
+                    <input type="text" id="editEntityTextField" class="form-control" placeholder="Enter Node Name"
+                           name="editNodeName" required disabled> <br>
+                    <textarea id="editEntityTextArea" class="form-control" rows="3"
+                              placeholder="Enter Description"></textarea>
+                    <br>
+                    <p>
+                        <button type="button" class="btn btn-default btn-sm" id="addFieldEditEntityBtn">Add Field
+                        </button>
+                    </p>
+                    <div id="editEntityFieldsWrapper">
+                    </div>
+                    <br>
+                    <input type="checkbox" id="regenerateAPI" placeholder="Regenerate API" name="regenerateAPI">
+                    Regenerate API </input> <br>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="editEntityBtn">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="copyNodeModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="copyNodeModalLabel">Copy Node</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <input type="hidden" id="copyNodeId"/>
+                    <input type="hidden" id="copyNodeType"/>
+                    <input type="text" id="copyNodeTextField" class="form-control" placeholder="Enter Node Name"
+                           name="copyNodeName" required/> <br>
+                    <textarea id="copyNodeTextArea" class="form-control" rows="3"
+                              placeholder="Enter Description"></textarea>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-2">
+                            Include
+                        </div>
+                        <div class="col-lg-6">
+                            <input type="checkbox" checked id="nodeUrl"><label for="nodeUrl">&nbsp;&nbsp;URL</label><br>
+                            <input type="checkbox" checked id="nodeMethodType"><label for="nodeMethodType">&nbsp;&nbsp;Method
+                            Type</label><br>
+                            <input type="checkbox" checked id="nodeBody"><label for="nodeBody">
+                            &nbsp;&nbsp;Body</label><br>
+                            <input type="checkbox" checked id="nodeHeaders"><label for="nodeHeaders">
+                            &nbsp;&nbsp;Headers</label><br>
+                            <input type="checkbox" checked id="nodeAuth"><label for="nodeAuth">
+                            &nbsp;&nbsp;Auth</label><br>
+                            <input type="checkbox" checked id="nodeTags"><label for="nodeTags">
+                            &nbsp;&nbsp;Tags</label><br>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id="copyNodeBtn" type="button" class="btn btn-primary">Copy</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="copyProjFolderModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="copyProjFolderModalLabel">Copy Node</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <input type="hidden" id="copyNodeId"/>
+                    <input type="hidden" id="copyNodeType"/>
+                    <input type="text" id="copyFolderNodeTextField" class="form-control" placeholder="Enter Node Name"
+                           name="copyNodeName" required/> <br>
+                    <textarea id="copyFolderNodeTextArea" class="form-control" rows="3"
+                              placeholder="Enter Description"></textarea>
+                    <br>
+                </form>
+                <div class="alert alert-info">
+                    This will copy all the folders and requests inside this node.
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id="copyProjFolderNodeBtn" type="button" class="btn btn-primary">Copy</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="editProjectModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="editProjectModalLabel">Edit Project</h4>
+            </div>
+            <div class="modal-body">
+                <form id="projectEditForm">
+                    <input type="hidden" id="editProjectId"/>
+                    <input type="text" id="editProjectTextField" class="form-control" placeholder="Enter Project Name"
+                           name="projectName" required/>
+                    <p class="text-danger" id="project-edit-error"></p><br>
+                    <textarea id="editProjectTextArea" class="form-control" rows="3"
+                              placeholder="Enter Description"></textarea>
+                    <br>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id="editProjectBtn" type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="editTagModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="editTagModalLabel">Edit Tag</h4>
+            </div>
+            <div class="modal-body">
+                <form id="tagEditForm">
+                    <input type="hidden" id="editTagId"/>
+                    <input type="text" id="editTagTextField" class="form-control" placeholder="Enter Tag Name"
+                           name="tagName" required/>
+                    <p class="text-danger" id="tag-name-edit-error"></p><br>
+                    <textarea id="editTagTextArea" class="form-control" rows="3"
+                              placeholder="Enter Description"></textarea>
+                    <br>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id="editTagBtn" type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="editWorkspaceModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="editWorkspaceModalLabel">Edit Workspace</h4>
+            </div>
+            <div class="modal-body">
+                <form id="workspaceEditForm">
+                    <input type="hidden" id="editWorkspaceId"/>
+                    <input type="text" id="editWorkspaceTextField" class="form-control"
+                           placeholder="Enter Workspace Name" name="workspaceName" required/>
+                    <p class="text-danger" id="workspace-edit-error"></p>
+                    <br>
+                    <textarea id="editWorkspaceTextArea" class="form-control" rows="3"
+                              placeholder="Enter Description"></textarea>
+                    <br>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id="editWorkspaceBtn" type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="deleteWorkspaceModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Delete Workspace</h4>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="deleteWorkspaceId"/>
+                Are You Sure You Want To Delete Current Workspace?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-primary" id="deleteWorkspaceBtn">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="switchWorkspaceModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="projectModalLabel">Switch Workspace</h4>
+            </div>
+            <div class="modal-body"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="deleteNodeModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Delete Node</h4>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="deleteNodeId"/>
+                Are You Sure You Want To Delete Selected Node?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-primary" id="deleteRequestBtn">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="deleteProjectModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Delete Project</h4>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="deleteProjectId"/>
+                Are You Sure You Want To Delete Selected Project?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-primary" id="deleteProjectBtn">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="deleteTagModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Delete Tag</h4>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="deleteTagId"/>
+                Are You Sure You Want To Delete Selected Tag?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-primary" id="deleteTagBtn">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="deleteEnvModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Delete Environment</h4>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="deleteEnvId"/>
+                Selected Environment?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-primary" id="deleteEnvBtn">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="globalSettingsModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Global Settings</h4>
+            </div>
+            <div class="modal-body">
+                <input type="text" class="form-control" placeholder="Request Timeout" name="requestTimeout"><br>
+                <input type="text" class="form-control" placeholder="Expression Language" name="expressionLanguage">
+                <br>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id="" type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="comingSoon" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="comingSoonLabel">Coming Soon</h4>
+            </div>
+            <div class="modal-body">UnsupportedOperationException("Not implemented yet")</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="collaboratorModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="tagModalLabel">Manage Collaborators</h4>
+            </div>
+            <div class="modal-body">
+                <div id="collaborators"></div>
+                <a id="addCollaborator">Add Collaborators</a>
+                <form id="addCollaboratorForm">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-8 col-sm-10">
+                            <br>
+                            <input type="text" id="collaboratorName" class="form-control" name="collaboratorName"
+                                   placeholder="Name" required> <br>
+                            <input type="email" id="collaboratorEmailId" class="form-control" name="collaboratorEmailId"
+                                   placeholder="Email Id" required><br>
+                            <input type="password" id="collaboratorPassword" class="form-control"
+                                   name="collaboratorPassword" placeholder="Password" required>
+                            <br>
+                            <button type="button" class="btn btn-default pull-right" id="saveCollaborator">Save</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <jsp:include page="footer.jsp"></jsp:include> -->
+<!--<script>-->
+<!--var ctx = "${pageContext.request.contextPath}";-->
+<!--</script>-->
+<!-- Templates -->
+<!-- Templates -->
+<script type="text/template" id="tpl-workspace-list-item">
+    <div id="dd-workspace">
+        <div class="dummyWorkspaceName"><@=workspace.name@>&nbsp;&nbsp;
+            <div class="btn-group hover-down-arrow">
+                <button type="button" class="dropdown-toggle" data-toggle="dropdown">
+                    <span class="fa fa-angle-down"></span> <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li class="edit-workspace"><i class="fa fa-pencil fa-fw"></i> Edit Workspace</li>
+                    <li class="delete-workspace"><i class="fa fa-trash-o fa-fw"></i> Delete Workspace</li>
+                    <li class="divider"></li>
+                    <li class="export-workspace"><i class="fa fa-download fa-fw"></i> Export Workspace</li>
+                    <li class="export-workspace"><i class="fa fa-download fa-fw"></i> Export (Swagger)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/template" id="tpl-project-list-item">
+    <a href="#/workspace/<@=project.workspaceId@>/project/<@=project.id@>" id=<@=project.id@> data-project-ref-id =
+        <@=project.projectRef.id@> class ="project-name">
+        <span class="glyphicon glyphicon-list-alt">
+		</span>&nbsp;&nbsp;<@=project.name@>&nbsp;&nbsp;
+        <div class="btn-group hover-down-arrow">
+            <button type="button" class="dropdown-toggle" data-toggle="dropdown">
+                <span class="fa fa-angle-down"></span> <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu">
+                <li class="edit-project"><i class="fa fa-pencil fa-fw"></i> Edit Project</li>
+                <li class="delete-project"><i class="fa fa-trash-o fa-fw"></i> Delete Project</li>
+                <li class="divider"></li>
+                <li class="export-project"><i class="fa fa-download fa-fw"></i> Export Project</li>
+                <li class="export-project"><i class="fa fa-download fa-fw"></i> Export (Swagger)</li>
+            </ul>
+        </div>
+    </a>
+</script>
+<script type="text/template" id="tpl-workspace-all-list-item">
+    <a href="#/workspace/<@=workspace.id@>" data-workspace-id=<@=workspace.id@> class="dummyWSli
+        list-group-item"><@=workspace.name@></a>
+</script>
+<script type="text/template" id="tpl-user-list-item">
+    <div class="row">
+        <div class="col-xs-6">
+            <h5 class="dummyUserName"><@=user.name@></h5>
+        </div>
+        <div class="col-xs-6">
+            <@ var name = $(".username").text(); if ( $.trim(name) != user.name ) { @>
+            <a href="#" data-user-id=<@=user.id@> class="deleteUser">Delete</a>
+            <@ } else{ @>
+            <span>Logged in</span>
+            <@ } @>
+        </div>
+    </div>
+</script>
+<script type="text/template" id="tpl-tag-list-item">
+    <a href="#/workspace/<@=tag.workspaceId@>/tag/<@=tag.id@>" id=<@=tag.id@> class = "tag-name"><span
+        class="glyphicon glyphicon-tag"></span>&nbsp;&nbsp;<@=tag.name@>&nbsp;&nbsp;
+        <div class="btn-group hover-down-arrow">
+            <button type="button" class="dropdown-toggle" data-toggle="dropdown">
+                <span class="fa fa-angle-down"></span> <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu">
+                <li class="edit-tag"><i class="fa fa-pencil fa-fw"></i> Edit Tag</li>
+                <li class="delete-tag"><i class="fa fa-trash-o fa-fw"></i> Delete Tag</li>
+            </ul>
+        </div>
+    </a>
+</script>
+<script type="text/template" id="tpl-tags-list-item">
+    <input type="checkbox" id=<@=tag.name@>>&nbsp;<@=tag.name@>&nbsp;&nbsp;
+</script>
+
+<script type="text/template" id="assert-result-list-item">
+    <tr>
+        <td><span class="<@=result.iconClass@> circle"></span><@=result.status@></td>
+        <td><@=result.propertyName@></td>
+        <td><@=result.comparator@></td>
+        <td><@=result.expectedValue@></td>
+        <td><@=result.actualValue@></td>
+    <tr>
+</script>
+
+<!--<script type="text/template" id="tpl-star-list-item">-->
+    <!--<a href="#" class="list-group-item" data-star-id=<@=node.id@> data-star-ref-id=<@=node.id@> data-toggle="tooltip"-->
+        <!--data-placement="bottom" title=<@=node.apiURL@>>-->
+        <!--<span class="<@=node.className@>"><@=node.methodType@></span>&nbsp;&nbsp;<@=node.name@>-->
+        <!--<div><span>&nbsp;&nbsp;<@=node.time@></span><span>&nbsp;<@=node.runBy@></span></div>-->
+    <!--</a>-->
+<!--</script>-->
+<!--<script type="text/template" id="tpl-tagged-node-list-item">-->
+    <!--<a href="#" class="list-group-item" data-node-id=<@=node.id@> data-tag-node-id=<@=node.id@> data-toggle="tooltip"-->
+        <!--data-placement="bottom" title=<@=node.apiURL@>>-->
+        <!--<span class="<@=node.className@>"><@=node.methodType@></span>&nbsp;&nbsp;<@=node.name@>-->
+        <!--<div><span>&nbsp;&nbsp;<@=node.time@></span><span>&nbsp;<@=node.runBy@></span></div>-->
+    <!--</a>-->
+<!--</script>-->
+<script type="text/template" id="tpl-project-runner-list-item">
+    <div class="div-list-item">
+        <p><span class="label label-primary"><@=nodeStatusResponse.methodType@></span>&nbsp;&nbsp;<strong><@=nodeStatusResponse.name@></strong>
+        </p>
+        <p><@=nodeStatusResponse.description@></p>
+        <p><@=nodeStatusResponse.apiUrl@>&nbsp;&nbsp;<@=nodeStatusResponse.duration@>&nbsp;ms</p>
+        <p>
+        <div class="success-icon circle"></div>
+        <span><@=nodeStatusResponse.successAsserts@></span>&nbsp;Success&nbsp;
+        <div class="failure-icon circle"></div>
+        <span><@=nodeStatusResponse.failureAsserts@></span>&nbsp;Failure
+        </p>
+    </div>
+</script>
+<!--<script type="text/template" id="tpl-history-list-item">-->
+    <!--<a href="#" class="list-group-item" data-history-id=<@=conversation.id@> data-history-ref-id=<@=conversation.id@>-->
+        <!--data-toggle="tooltip" data-placement="bottom" title=<@=conversation.rfRequestDTO.apiUrl@> >-->
+        <!--<div class="<@=conversation.className@>"><@=conversation.rfRequestDTO.methodType@></div>-->
+        <!--<@ if (conversation.name == null || conversation.name == "" ) { @>-->
+        <!--<div class="activity"><@=conversation.rfRequestDTO.apiUrl@></div>-->
+        <!--<@ } else { @>-->
+        <!--<div class="activity"><@=conversation.name@></div>-->
+        <!--<@ } @>-->
+
+        <!--<span><@=conversation.time@></span><span>&nbsp;<@=conversation.runBy@></span>-->
+    <!--</a>-->
+<!--</script>-->
+<script type="text/template" id="tpl-entity-field">
+    <p>
+    <div class="row">
+        <div class="col-xs-5">
+            <input type="text" class="form-control entityFieldName" placeholder="Enter Field Name">
+        </div>
+        <div class="col-xs-5">
+            <select class="form-control entityFieldType">
+                <option>String</option>
+                <option>Number</option>
+                <option>Boolean</option>
+                <option>Date</option>
+                <option>Object</option>
+                <option>Array</option>
+                <option>Relation</option>
+                <option>Geographic point</option>
+            </select>
+        </div>
+        <div class="col-xs-2">
+            <button type="button" class="btn btn-default destroy"><span class="glyphicon glyphicon-remove"></span>
+            </button>
+        </div>
+    </div>
+    </p>
+</script>
+<script type="text/template" id="tpl-query-param-item">
+    <p>
+    <div class="row">
+        <div class="col-xs-5">
+            <input type="text" class="form-control urlDataName" placeholder="Enter Key" value=<@=query.paramKey@>>
+        </div>
+        <div class="col-xs-5">
+            <input type="text" class="form-control urlDataValue" placeholder="Enter Value" value=<@=query.paramValue@>>
+        </div>
+        <div class="col-xs-2">
+            <button type="button" class="btn btn-default destroy"><span class="glyphicon glyphicon-remove"></span>
+            </button>
+        </div>
+    </div>
+    </p>
+</script>
+<script type="text/template" id="tpl-query-param-list-item">
+    <p>
+    <div class="row">
+        <div class="col-xs-5">
+            <input type="text" class="form-control urlDataName" placeholder="Enter Key">
+        </div>
+        <div class="col-xs-5">
+            <input type="text" class="form-control urlDataValue" placeholder="Enter Value">
+        </div>
+        <div class="col-xs-2">
+            <button type="button" class="btn btn-default destroy"><span class="glyphicon glyphicon-remove"></span>
+            </button>
+        </div>
+    </div>
+    </p>
+</script>
+<script type="text/template" id="tpl-form-list-item">
+    <p>
+    <div class="row">
+        <div class="col-xs-5">
+            <input type="text" class="form-control formDataName" placeholder="Enter Key">
+        </div>
+        <div class="col-xs-5">
+            <input type="text" class="form-control formDataValue" placeholder="Enter Value">
+        </div>
+        <div class="col-xs-2">
+            <button type="button" class="btn btn-default destroy"><span class="glyphicon glyphicon-remove"></span>
+            </button>
+        </div>
+    </div>
+    </p>
+</script>
+<script type="text/template" id="tpl-file-list-item">
+    <p>
+    <div class="row">
+        <div class="col-xs-5">
+            <input type="text" class="form-control fileDataName" placeholder="Enter Key">
+        </div>
+        <div class="col-xs-5">
+            <input type="file" class="form-control fileDataValue" placeholder="Enter Value">
+        </div>
+        <div class="col-xs-2">
+            <button type="button" class="btn btn-default destroy"><span class="glyphicon glyphicon-remove"></span>
+            </button>
+        </div>
+    </div>
+    </p>
+</script>
+<script type="text/template" id="tpl-header-list-item">
+    <p>
+    <div class="row">
+        <div class="col-xs-5">
+            <input type="text" class="form-control headerName http-header" placeholder="Enter Header Name">
+        </div>
+        <div class="col-xs-5">
+            <input type="text" class="form-control headerValue" placeholder="Enter Header Value">
+        </div>
+        <div class="col-xs-2">
+            <button type="button" class="btn btn-default destroy"><span class="glyphicon glyphicon-remove"></span>
+            </button>
+        </div>
+    </div>
+    </p>
+</script>
+<script type="text/template" id="tpl-environment">
+    <div class="row">
+        <div class="col-xs-12">
+            <input type="text" id="environmentName" data-environment-id="-1" class="form-control"
+                   placeholder="Enter Environment Name" name="envName" required> <br>
+            <button type="button" class="btn btn-default btn-sm" id="addEnvFieldBtn">New Property</button>
+            <button type="button" class="btn btn-default btn-sm pull-right" id="deleteEnvironment">Delete Environment
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div id="envFieldsWrapper">
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/template" id="tpl-env-field">
+    <p>
+    <div class="row">
+        <div class="col-xs-5">
+            <input type="text" class="form-control envPropertyName http-header" placeholder="Enter Property Name">
+        </div>
+        <div class="col-xs-5">
+            <input type="text" class="form-control envPropertyValue" placeholder="Enter Property Value">
+        </div>
+        <div class="col-xs-2">
+            <button type="button" class="btn btn-default destroy"><span class="glyphicon glyphicon-remove"></span>
+            </button>
+        </div>
+    </div>
+    </p>
+</script>
+<script type="text/template" id="tpl-manage-environment">
+    <div>
+        <div class="row">
+            <div class="col-xs-6">
+                <button type="button" class="btn btn-default" id="addNewEnvironmentBtn">New Environment</button>
+            </div>
+            <div class="col-xs-6">
+                <select class="existingEnvironments form-control">
+                    <option>Update Existing</option>
+                    <option>Dev Env</option>
+                    <option>QA Env</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div id="environmentWrapper">
+    </div>
+</script>
+<script type="text/template" id="tpl-assert">
+    <p>
+    <div class="row assertRow">
+        <div class="col-xs-4">
+            <input type="text" class="form-control assertPropertyName http-header"
+                   placeholder="Property Name or Expression">
+        </div>
+        <div class="col-xs-2">
+            <select class="assertCompare form-control" placeholder="Select">
+                <option>=</option>
+                <option>!=</option>
+                <option>Contains</option>
+                <option>! Contains</option>
+                <option><</option>
+                <option><=</option>
+                <option>></option>
+                <option>>=</option>
+                <option>Contains Key</option>
+                <option>! Contains Key</option>
+                <option>Contains Value</option>
+                <option>! Contains Value</option>
+            </select>
+        </div>
+        <div class="col-xs-4">
+            <input type="text" class="form-control assertExpectedValue" placeholder="Expected Value">
+        </div>
+        <div class="col-xs-2">
+            <button type="button" class="btn btn-default destroy"><span class="glyphicon glyphicon-remove"></span>
+            </button>
+        </div>
+    </div>
+    </p>
+</script>
+<script type="text/template" id="tpl-manage-asserts">
+    <div>
+        <div class="row">
+            <div class="col-xs-6">
+                <button type="button" class="btn btn-default btn-sm" id="addAssertBtn">Add Assert</button>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div id="assertsWrapper">
+    </div>
+</script>
+<script type="text/template" id="tpl-tree-node">
+    &nbsp;
+    <div class="btn-group menu-arrow">
+        <button type="button" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-angle-down"
+                                                                                   data-toggle="dropdown"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li class="edit-node"><i class="fa fa-pencil fa-fw"></i> Edit Node</li>
+            <li class="delete-node"><i class="fa fa-trash-o fa-fw"></i> Delete Node</li>
+            <li class="copy-node"><i class="fa fa-copy fa-fw"></i> Copy Node</li>
+            <li class="run-node"><i class="fa fa-play fa-fw"></i> Run Node</li>
+        </ul>
+    </div>
+</script>
+<script type="text/template" id="tpl-tree-folder">
+    &nbsp;
+    <div class="btn-group menu-arrow">
+        <button type="button" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-angle-down"
+                                                                                   data-toggle="dropdown"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li class="edit-node"><i class="fa fa-pencil fa-fw"></i> Edit Node</li>
+            <li class="delete-node"><i class="fa fa-trash-o fa-fw"></i> Delete Node</li>
+            <li class="copy-node"><i class="fa fa-copy fa-fw"></i> Copy Node</li>
+            <li class="run-folder"><i class="fa fa-play fa-fw"></i> Run Folder</li>
+        </ul>
+    </div>
+</script>
+<script type="text/template" id="tpl-environment-list-item">
+    <span><@=conversation.rfRequest.methodType@></span>
+</script>
+<script type="text/template" id="tpl-oauth2">
+    <div>
+        <div class="row">
+            <div class="col-xs-6">
+                <select class="form-control existingOAuth">
+                    <option value="-1" selected disabled>Select Existing</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</script>
+<!-- JavaScript -->
+<!--<script data-main="static/js/main"></script>-->
+<!--<script src="static/js/libs/require/require.js"></script>-->
+
+
+<!--<script data-main="static/js/main" src="static/js/libs/require/require.js"></script>-->
+

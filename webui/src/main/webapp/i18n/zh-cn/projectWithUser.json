@@ -1,0 +1,23 @@
+{
+    "onePassApp": {
+        "projectWithUser" : {
+            "home": {
+                "title": "人力资源",
+                "createLabel": "为项目添加人力资源",
+                "createOrEditLabel": "添加或修改项目的人力资源",
+                "search": "检索人员分配信息"
+            },
+            "created": "人力资源添加成功 {{ param }}",
+            "updated": "人力资源更新成功 {{ param }}",
+            "deleted": "人力资源删除成功 {{ param }}",
+            "delete": {
+                "question": "是否确定删除该资源信息 {{ id }}?"
+            },
+            "detail": {
+                "title": "人力资源"
+            },
+            "projectId": "项目标识",
+            "userId": "人员标识"
+        }
+    }
+}

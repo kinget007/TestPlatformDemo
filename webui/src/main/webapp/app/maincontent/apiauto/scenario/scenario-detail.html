@@ -1,0 +1,363 @@
+<div>
+    <h2>场景设计</h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <button class="btn btn-info btn-flat right" type="button" data-toggle="modal" data-target="#myAdd"
+                            ui-sref="scenario-detail.edit({id:scenarioDocInit._id})">Edit
+                    </button><!--ng-click="getApis(scenarioDocInit._id)" -->
+                    <!--<button class="btn btn-info btn-flat right" type="button" data-toggle="modal" data-target="#myResult"-->
+                            <!--ui-sref="scenario-detail.run({id:scenarioDocInit._id})">RUN-->
+                    <!--</button>-->
+                    <button class="btn btn-info btn-flat right" type="button" data-toggle="modal" data-target="#myResult" ng-click="sendRequestAll(scenarioDocInit._id)">RUN
+                    </button>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h1 ng-if="dependsOnLength == 2">Nothing to display,Please add APIs!</h1>
+                                <div ng-if="dependsOnLength != 2" class="panel-group" id="panel">
+                                    <div class="panel panel-default"
+                                         ng-repeat="(orderNum,ScenarioApiInfo) in scenarioDocDependsOn">
+                                        <div class="panel-heading">
+                                            <a class="panel-title collapsed" data-toggle="collapse" data-parent="#panel"
+                                               href="/#/scenario-list/{{scenarioId}}#panel-element_{{orderNum}}">
+                                                <span class="col-lg-1">{{orderNum}}</span>
+                                                <span class="col-lg-4">{{scenarioSwaggerDoc.paths[ScenarioApiInfo.pathUrl][ScenarioApiInfo.httpMethod.toLowerCase()].summary}}</span>
+                                                <span class="col-lg-1">{{ScenarioApiInfo.httpMethod}}</span>
+                                                <span>{{ScenarioApiInfo.scheme}}://{{ScenarioApiInfo.host}}{{ScenarioApiInfo.basePath}}{{ScenarioApiInfo.pathUrl}}</span>
+                                            </a>
+                                        </div>
+                                        <div id="panel-element_{{orderNum}}" class="panel-collapse collapse">
+                                            <div class="panel-body">
+
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div>
+                                                            <div class="input-group margin">
+                                                                <input type="text" class="btn btn-block btn-instagram"
+                                                                       value="REQUEST" ng-readonly="true">
+                                                                <span class="input-group-btn">
+                                                                        <!--<button class="btn btn-info btn-flat"-->
+                                                                                <!--type="button" data-toggle="modal"-->
+                                                                                <!--data-target="#myResult"-->
+                                                                                <!--ui-sref="scenario-detail.run({id:scenarioDocInit._id})"-->
+                                                                                <!--ng-click="SendRequest(scenarioDocInit._id,orderNum)">Go!-->
+                                                                        <!--</button>-->
+                                                                    <button class="btn btn-info btn-flat"
+                                                                            type="button" data-toggle="modal"
+                                                                            data-target="#myResult"
+                                                                            ng-click="SendRequest(scenarioDocInit._id,orderNum)">Go!
+                                                                        </button>
+                                                                    </span>
+                                                            </div>
+
+
+                                                            <div class="margin">
+                                                                <select id="myScheme_{{orderNum}}" ng-model="myScheme"
+                                                                        ng-options="myScheme for myScheme in scenarioDocInit.swagger.schemes"
+                                                                        class="form-control" style="width: 100%;">
+                                                                    <!--@*<option value="">http</option>*@-->
+                                                                </select>
+                                                            </div>
+                                                            <div class="input-group margin">
+                                                                    <span class="input-group-btn">
+                                                                        <button class="btn btn-info btn-flat"
+                                                                                type="button">H</button>
+                                                                    </span>
+                                                                <input id="myHost_{{orderNum}}" type="text"
+                                                                       class="form-control"
+                                                                       value="{{ScenarioApiInfo.host}}">
+                                                            </div>
+
+                                                            <div class="input-group margin">
+                                                                    <span class="input-group-btn">
+                                                                        <button class="btn btn-info btn-flat"
+                                                                                type="button">P</button>
+                                                                    </span>
+                                                                <input id="myPath_{{orderNum}}" ng-readonly="true"
+                                                                       type="text" class="form-control"
+                                                                       value="{{ScenarioApiInfo.basePath}}{{ScenarioApiInfo.pathUrl}}">
+                                                            </div>
+
+
+                                                            <div id="panel_header_{{orderNum}}">
+                                                                <div>
+                                                                    <div>
+                                                                        <a data-toggle="collapse"
+                                                                           data-parent="#panel_header"
+                                                                           href="/#/scenario-list/{{scenarioId}}#panel-element_header_{{orderNum}}">
+                                                                            <div class="input-group margin">
+                                                                                    <span class="input-group-btn">
+                                                                                        <button
+                                                                                            class="btn btn-info btn-flat"
+                                                                                            type="button">H</button>
+                                                                                    </span>
+                                                                                <input type="text"
+                                                                                       id="myHeader_{{orderNum}}"
+                                                                                       class="form-control"
+                                                                                       placeholder='{"myHeader":"value"}'
+                                                                                       value='{{ScenarioApiInfo.headers}}'>
+                                                                            </div>
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div id="panel_params_{{orderNum}}"
+                                                                 ng-hide="scenarioSwaggerDoc.paths[ScenarioApiInfo.pathUrl][ScenarioApiInfo.httpMethod.toLowerCase()].parameters==''">
+                                                                <div>
+                                                                    <div>
+                                                                        <a data-toggle="collapse"
+                                                                           data-parent="#panel_params_{{orderNum}}"
+                                                                           href="/#/scenario-list/{{scenarioId}}#panel-element_params_{{orderNum}}">
+                                                                            <div class="input-group margin">
+                                                                                    <span class="input-group-btn">
+                                                                                        <button
+                                                                                            class="btn btn-info btn-flat"
+                                                                                            type="button">P</button>
+                                                                                    </span>
+                                                                                <input type="text" class="form-control"
+                                                                                       ng-readonly="true"
+                                                                                       value="{{scenarioSwaggerDoc.paths[ScenarioApiInfo.pathUrl][ScenarioApiInfo.httpMethod.toLowerCase()].parameters}}">
+                                                                            </div>
+                                                                        </a>
+                                                                    </div>
+                                                                    <div id="panel-element_params_{{orderNum}}"
+                                                                         class="panel-collapse collapse">
+                                                                        <div class="margin">
+
+                                                                            <table class="table table-condensed"
+                                                                                   id="myParams_{{orderNum}}">
+                                                                                <tbody>
+                                                                                <tr class="btn-instagram">
+                                                                                    <th>Param Name</th>
+                                                                                    <!--@*<th>Required</th>*@-->
+                                                                                    <th>Param Value</th>
+                                                                                    <th>Param Type</th>
+                                                                                </tr>
+                                                                                <tr ng-repeat="fieldValue in ScenarioApiInfo.fieldValues">
+                                                                                    <td>{{fieldValue.name}}</td>
+                                                                                    <!--@*<td>Parameter.required</td>*@-->
+                                                                                    <td><input class="form-control"
+                                                                                               type="text"
+                                                                                               value="{{fieldValue.value}}">
+                                                                                    </td>
+                                                                                    <td>{{fieldValue.in}}</td>
+                                                                                </tr>
+                                                                                <!--@*<tr ng-repeat="Parameter in scenarioSwaggerDoc.paths[ScenarioApiInfo.pathUrl][ScenarioApiInfo.httpMethod.toLowerCase()].parameters">*@-->
+                                                                                <!--@*<td>{{Parameter.name}}</td>*@-->
+                                                                                <!--@*<td>{{Parameter.required}}</td>*@-->
+                                                                                <!--@*<td><input class="form-control" type="text" value="{{ScenarioApiInfo.fieldValues[$index].value}}"></td>*@-->
+                                                                                <!--@*<td>{{Parameter.in}}</td>*@-->
+                                                                                <!--@*</tr>*@-->
+                                                                                <!--@*<tr ng-if="Parameter.in != 'body'" ng-repeat="Parameter in Operation.parameters">*@-->
+                                                                                <!--@*<td>{{Parameter.name}}</td>*@-->
+                                                                                <!--@*<td>{{Parameter.required}}</td>*@-->
+                                                                                <!--@*<td><input class="form-control" type="text"></td>*@-->
+                                                                                <!--@*<td>{{Parameter.in}}</td>*@-->
+                                                                                <!--@*</tr>*@-->
+                                                                                <!--@*<tr ng-if="Parameter.in == 'body'" ng-repeat="Parameter in Operation.parameters">*@-->
+                                                                                <!--@*<td>{{Parameter.name}}</td>*@-->
+                                                                                <!--@*<td>{{Parameter.required}}</td>*@-->
+                                                                                <!--@*<td><input class="form-control" type="text" value="json object"></td>*@-->
+                                                                                <!--@*<td>{{Parameter.in}}</td>*@-->
+                                                                                <!--@*</tr>*@-->
+                                                                                </tbody>
+                                                                            </table>
+                                                                            <div ng-jsoneditor="onLoad"
+                                                                                 ng-model="scenarioSwaggerDoc.paths[ScenarioApiInfo.pathUrl][ScenarioApiInfo.httpMethod.toLowerCase()].parameters"
+                                                                                 options="parameters_tree.options"
+                                                                                 style="height: 250px;"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6" id="scenarioApiChecks_{{orderNum}}">
+                                                        <div class="input-group margin">
+                                                            <input type="text" class="btn btn-block btn-instagram"
+                                                                   value="CHECKS" ng-readonly="true">
+                                                            <span class="input-group-btn">
+                                                                    <button class="btn btn-info btn-flat" type="button"
+                                                                            ng-click="addChecks(orderNum)">ADD</button>
+                                                                </span>
+                                                        </div>
+
+                                                        <div id="panel_checks_{{orderNum}}">
+
+                                                            <div>
+                                                                <div>
+                                                                    <a data-toggle="collapse"
+                                                                       data-parent="#panel_checks_{{orderNum}}"
+                                                                       href="/#/scenario-list/{{scenarioId}}#panel-element_checks_{{orderNum}}">
+                                                                        <div class="input-group margin">
+                                                                                <span class="input-group-btn">
+                                                                                    <button
+                                                                                        class="btn btn-info btn-flat"
+                                                                                        type="button">C</button>
+                                                                                </span>
+                                                                            <input type="text" class="form-control"
+                                                                                   value="{{ScenarioApiInfo.checks}}"
+                                                                                   ng-readonly="true">
+                                                                        </div>
+                                                                    </a>
+                                                                </div>
+                                                                <div id="panel-element_checks_{{orderNum}}"
+                                                                     class="panel-collapse collapse">
+                                                                    <div class="margin">
+                                                                        <table class="table table-condensed"
+                                                                               id="myChecks_{{orderNum}}">
+                                                                            <tbody>
+                                                                            <tr class="btn-instagram">
+                                                                                <th>Field Name</th>
+                                                                                <th>Method</th>
+                                                                                <!--<th>Target Field</th>-->
+                                                                                <th>Expect</th>
+                                                                            </tr>
+                                                                            <tr ng-repeat="check in ScenarioApiInfo.checks">
+                                                                                <td class="col-md-3"><input type="text"
+                                                                                                            class="form-control"
+                                                                                                            value="{{check.field}}">
+                                                                                </td>
+                                                                                <td>
+                                                                                    <!--<select class="assertCompare form-control" placeholder="Select"-->
+                                                                                            <!--ng-model="SchemeSelect"-->
+                                                                                            <!--ng-options="check as check for check in vm.checks">-->
+                                                                                        <!--<option ng-selected="true">{{check.checkMethod}}</option>-->
+                                                                                    <!--</select>-->
+                                                                                    <select id="CheckMethodSelect"
+                                                                                            class="form-control select2"
+                                                                                            ng-model="SchemeSelect">
+                                                                                        <option ng-selected="true" value="{{check.checkMethod}}">
+                                                                                            {{check.checkMethod}}
+                                                                                        </option>
+                                                                                        <option value="=">=</option>
+                                                                                        <option value="!=">!=</option>
+                                                                                        <option value="Contain">Contain</option>
+                                                                                        <option value="!Contain">!Contain</option>
+                                                                                        <option value=">">></option>
+                                                                                        <option value=">=">>=</option>
+                                                                                        <option value="<"><</option>
+                                                                                        <option value="<="><=</option>
+                                                                                        <option value="Contains Key">Contains Key</option>
+                                                                                        <option value="!Contains Key">!Contains Key</option>
+                                                                                        <option value="Contains Value">Contains Value</option>
+                                                                                        <option value="!Contains Value">!Contains Value</option>
+                                                                                    </select>
+                                                                                </td>
+                                                                                <!--<td class="col-md-3"><input type="text"-->
+                                                                                                            <!--class="form-control"-->
+                                                                                                            <!--value="{{check.targetField}}">-->
+                                                                                <!--</td>-->
+                                                                                <td class="col-md-3"><input type="text"
+                                                                                                            class="form-control"
+                                                                                                            value="{{check.expectValue}}">
+                                                                                </td>
+                                                                            </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                        <!--@*<div ng-jsoneditor="onLoad" ng-model="editor_code.data" options="editor_code.options" style="height: 250px;"></div>*@-->
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div><!-- /.box-body -->
+            </div><!-- /.box -->
+
+        </div><!-- /.col -->
+    </div>
+</div>
+
+<div class="modal fade" id="myResult" tabindex="-1" role="dialog" aria-labelledby="myModalResult" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                        ng-click="vm.clear()">&times;</button>
+                <h4 class="modal-title">RESPONSE</h4>
+            </div>
+            <div class="modal-body">
+                <jhi-alert-error></jhi-alert-error>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel-group" id="panel_result">
+                                <div class="panel panel-default" ng-repeat="(orderNum,ScenarioApiInfoResult) in requestAll">
+                                    <div class="panel-heading">
+                                        <a class="panel-title collapsed" data-toggle="collapse" data-parent="#panel_result" href="/#/scenario-list/{{scenarioId}}#panel_result_{{orderNum}}">
+                                            <span class="col-lg-1">{{orderNum}}</span>
+                                            <span class="col-lg-1">{{ScenarioApiInfoResult.httpMethod}}</span>
+                                            <span class="col-lg-9">{{ScenarioApiInfoResult.scheme}}://{{ScenarioApiInfoResult.host}}{{ScenarioApiInfoResult.basePath}}{{ScenarioApiInfoResult.pathUrl}}</span>
+                                            <span>{{getResultFromResponse(ScenarioApiInfoResult.checks)}}</span>
+                                        </a>
+                                    </div>
+
+                                    <div id="panel_result_{{orderNum}}" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div>
+                                                        <div ng-jsoneditor="onLoad" ng-model="ScenarioApiInfoResult.response" prefer-text="true" options="{mode:'tree'}" style="height: 250px;"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12" ng-hide="{{ScenarioApiInfoResult.checks.length==0}}">
+                                                    <div class="margin">
+                                                        <table class="table table-condensed" id="myChecks_result_{{orderNum}}">
+                                                            <tbody>
+                                                            <tr class="btn-instagram">
+                                                                <th>Field Name</th>
+                                                                <th>Method</th>
+                                                                <!--<th>Target Field</th>-->
+                                                                <th>Expect</th>
+                                                                <th>Status</th>
+                                                            </tr>
+                                                            <tr ng-repeat="check in ScenarioApiInfoResult.checks">
+                                                                <td class="col-md-3">{{check.field}}</td>
+                                                                <td>{{check.checkMethod}}</td>
+                                                                <!--<td class="col-md-3"><input type="text" class="form-control" value="{{check.targetField}}"></td>-->
+                                                                <td class="col-md-3">{{check.expectValue}}</td>
+                                                                <td class="col-md-1">{{check.status}}</td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                        <!--@*<div ng-jsoneditor="onLoad" ng-model="editor_code.data" options="editor_code.options" style="height: 250px;"></div>*@-->
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- /.col-md-12 -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+                    <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span
+                    data-translate="entity.action.cancel">确认</span>
+                </button>
+                <!--<button type="button" ng-disabled="runForm.$invalid || vm.isSaving" class="btn btn-primary">-->
+                    <!--<span class="glyphicon glyphicon-save"></span>&nbsp;<span></span>-->
+                <!--</button>-->
+            </div>
+        </div>
+    </div>
+</div>

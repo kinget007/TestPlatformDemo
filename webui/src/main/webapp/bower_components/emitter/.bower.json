@@ -1,0 +1,15 @@
+{
+  "name": "emitter",
+  "homepage": "https://github.com/jhermsmeier/emitter.js",
+  "version": "1.5.3",
+  "_release": "1.5.3",
+  "_resolution": {
+    "type": "version",
+    "tag": "1.5.3",
+    "commit": "1be7e997d9f7a1c6021594e0538459c38fc2a9cd"
+  },
+  "_source": "https://github.com/jhermsmeier/emitter.js.git",
+  "_target": "^1.5.3",
+  "_originalSource": "emitter",
+  "_direct": true
+}

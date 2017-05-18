@@ -1,0 +1,39 @@
+
+<div>
+    <h2><span data-translate="onePassApp.jobJenkins.detail.title">Job Jenkins</span> {{vm.jobJenkins.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="onePassApp.jobJenkins.description">Description</span></dt>
+        <dd>
+            <span>{{vm.jobJenkins.description}}</span>
+        </dd>
+        <dt><span data-translate="onePassApp.jobJenkins.urlJenkins">Url Jenkins</span></dt>
+        <dd>
+            <span>{{vm.jobJenkins.urlJenkins}}</span>
+        </dd>
+        <!--<dt><span data-translate="onePassApp.jobJenkins.serverIdJenkins">Server Id Jenkins</span></dt>-->
+        <!--<dd>-->
+            <!--<span>{{vm.jobJenkins.serverIdJenkins}}</span>-->
+        <!--</dd>-->
+        <!--<dt><span data-translate="onePassApp.jobJenkins.folderJenkins">Folder Jenkins</span></dt>-->
+        <!--<dd>-->
+            <!--<span>{{vm.jobJenkins.folderJenkins}}</span>-->
+        <!--</dd>-->
+        <!--<dt><span data-translate="onePassApp.jobJenkins.etc">Etc</span></dt>-->
+        <!--<dd>-->
+            <!--<span>{{vm.serverJenkins.etc}}</span>-->
+        <!--</dd>-->
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="job-jenkins-detail.edit({id:vm.jobJenkins.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

@@ -1,0 +1,34 @@
+{
+    "onePassApp": {
+        "serverJenkins" : {
+            "home": {
+                "title": "Jenkins Servers",
+                "createLabel": "添加一个Jenkins Master",
+                "createOrEditLabel": "添加或者修改 添加一个Jenkins Master",
+                "search": "搜索 Jenkins Master"
+            },
+            "delete": {
+                "question": "是否确定删除该 Jenkins Master {{ id }}?"
+            },
+            "detail": {
+                "title": "Jenkins Servers"
+            },
+            "description": "名称",
+            "urlJenkins": "Jenkins URL",
+            "loginJenkins": "Jenkins 账号",
+            "pwdJenkins": "Jenkins 密码",
+            "publicFlag": "是否为公共资源",
+            "userId": "添加用户Id",
+            "userName": "添加用户名",
+            "status": "状态",
+            "etc": "其他"
+        }
+    },
+    "jenkinsserviceApp": {
+        "serverJenkins" : {
+            "created": "新的 Jenkins Master 添加成功 {{ param }}",
+            "updated": "新的 Jenkins Master 更新成功 {{ param }}",
+            "deleted": "新的 Jenkins Master 删除成功 {{ param }}"
+        }
+    }
+}

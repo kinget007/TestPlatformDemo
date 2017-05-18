@@ -1,0 +1,96 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "swaggerUri",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "version",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "scheme",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "host",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "port",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "path",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "operation",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "cookieParams",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "formParams",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "queryParams",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "pathParams",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "headParams",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "bodyParams",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "requestDesc",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "responseDesc",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "checks",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "proxys",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "projectId",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "projectDescription",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "etc",
+            "fieldType": "String"
+        }
+    ],
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "api_info",
+    "pagination": "no",
+    "microserviceName": "apimanageservice",
+    "searchEngine": false
+}

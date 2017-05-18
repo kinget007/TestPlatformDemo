@@ -1,0 +1,13 @@
+version: '2'
+services:
+    onepass-cassandra-migration:
+        container_name: onepass-cassandra-migration
+        environment:
+            - CASSANDRA_CONTACT_POINT=onepass-cassandra
+            - USER=docker-cassandra-migration
+            # - DEBUG_LOG=1 # uncomment to show debug logs during the migration process
+        build:
+            context: .
+            dockerfile: cassandra/Cassandra-Migration.Dockerfile
+        volumes:
+            - ../resources/config/cql:/cql:ro

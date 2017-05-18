@@ -1,0 +1,34 @@
+{
+    "onePassApp": {
+        "serverJenkins" : {
+            "home": {
+                "title": "Server Jenkins",
+                "createLabel": "Create a new Server Jenkins",
+                "createOrEditLabel": "Create or edit a Server Jenkins",
+                "search": "Search for Server Jenkins"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Server Jenkins {{ id }}?"
+            },
+            "detail": {
+                "title": "Server Jenkins"
+            },
+            "description": "Description",
+            "urlJenkins": "Url Jenkins",
+            "loginJenkins": "Login Jenkins",
+            "pwdJenkins": "Pwd Jenkins",
+            "publicFlag": "Public Flag",
+            "userId": "User Id",
+            "userName": "User Name",
+            "status": "Status",
+            "etc": "Etc"
+        }
+    },
+    "jenkinsserviceApp": {
+        "serverJenkins" : {
+            "created": "A new Server Jenkins is created with identifier {{ param }}",
+            "updated": "A Server Jenkins is updated with identifier {{ param }}",
+            "deleted": "A Server Jenkins is deleted with identifier {{ param }}"
+        }
+    }
+}

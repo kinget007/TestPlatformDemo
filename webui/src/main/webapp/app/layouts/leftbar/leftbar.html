@@ -1,0 +1,130 @@
+<div ng-switch="vm.isAuthenticated()">
+    <ul class="sidebar-menu">
+        <li class="header">LIST</li>
+
+        <li class="treeview"><!-- 功能自动化 -->
+            <a>
+                <i class="fa fa-flask"></i><span data-translate="leftList.autoFunction.title">功能自动化</span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li ui-sref-active="active">
+                    <a ui-sref="apidoc" ng-click="vm.collapseNavbar()">
+                        <!--<span class="glyphicon glyphicon-asterisk"></span>&nbsp;-->
+                        <span class="fa fa-minus"></span>&nbsp;
+                        <span>测试用例</span>
+                    </a>
+                </li>
+                <li ui-sref-active="active">
+                    <a ui-sref="scenario-list" ng-click="vm.collapseNavbar()">
+                        <!--<span class="glyphicon glyphicon-asterisk"></span>&nbsp;-->
+                        <span class="fa fa-minus"></span>&nbsp;
+                        <span>场景设计</span>
+                    </a>
+                </li>
+                <!--<li ui-sref-active="active" ng-switch-when="true">-->
+                    <!--<a><i class="fa fa-minus"></i><span-->
+                        <!--data-translate="leftList.autoFunction.unitTest">单元测试</span></a></li>-->
+                <!--<li ui-sref-active="active" ng-switch-when="true"><a><i class="fa fa-minus"></i><span-->
+                    <!--data-translate="leftList.autoFunction.apiTest">Api测试</span></a>-->
+                    <!--<ul class="treeview-menu">-->
+                        <!--<li ui-sref-active="active">-->
+                            <!--<a ui-sref="apidoc" ng-click="vm.collapseNavbar()">-->
+                                <!--&lt;!&ndash;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&ndash;&gt;-->
+                                <!--<span class="fa fa-minus"></span>&nbsp;-->
+                                <!--<span>测试用例</span>-->
+                            <!--</a>-->
+                        <!--</li>-->
+                        <!--<li ui-sref-active="active">-->
+                            <!--<a ui-sref="scenario-list" ng-click="vm.collapseNavbar()">-->
+                                <!--&lt;!&ndash;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&ndash;&gt;-->
+                                <!--<span class="fa fa-minus"></span>&nbsp;-->
+                                <!--<span>场景设计</span>-->
+                            <!--</a>-->
+                        <!--</li>-->
+                        <!--&lt;!&ndash; needle-add-entity-to-menu - will add entities to the menu here &ndash;&gt;-->
+                    <!--</ul>-->
+                <!--</li>-->
+                <!--<li ui-sref-active="active" ng-switch-when="true"><a><i class="fa fa-minus"></i><span-->
+                    <!--data-translate="leftList.autoFunction.scriptTest">脚本测试</span></a></li>-->
+            </ul>
+        </li><!-- end of 功能自动化 -->
+
+        <li class="treeview"><!-- 性能自动化 -->
+            <a>
+                <i class="fa fa-hourglass-half"></i><span data-translate="leftList.autoPerformance.title">版本基线自动化</span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li ui-sref-active="active" ng-switch-when="true"><a><i class="fa fa-minus"></i><span
+                    data-translate="leftList.autoPerformance.apiTest">Api测试</span></a>
+                    <ul class="treeview-menu">
+                        <li ng-show="vm.swaggerEnabled" ui-sref-active="active">
+                            <a ui-sref="apidocs" ng-click="vm.collapseNavbar()">
+                                <span class="fa fa-minus"></span>&nbsp;
+                                <!--<span class="glyphicon glyphicon-book"></span>&nbsp;-->
+                                <span data-translate="global.menu.admin.apidocs">API</span>
+                            </a>
+                        </li>
+                        <li ui-sref-active="active">
+                        <a ui-sref="api-postman" ng-click="vm.collapseNavbar()">
+                        <!--<span class="glyphicon glyphicon-asterisk"></span>&nbsp;-->
+                        <span class="fa fa-minus"></span>&nbsp;
+                        <span data-translate="global.menu.entities.apiPostman">Api PostMan</span>
+                        </a>
+                        </li>
+                        <!--<li ui-sref-active="active">-->
+                            <!--<a ui-sref="api-info" ng-click="vm.collapseNavbar()">-->
+                                <!--&lt;!&ndash;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&ndash;&gt;-->
+                                <!--<span class="fa fa-minus"></span>&nbsp;-->
+                                <!--<span data-translate="global.menu.entities.apiInfo">Api Info</span>-->
+                            <!--</a>-->
+                        <!--</li>-->
+                        <!--<li ui-sref-active="active">-->
+                            <!--<a ui-sref="test-suit" ng-click="vm.collapseNavbar()">-->
+                                <!--&lt;!&ndash;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&ndash;&gt;-->
+                                <!--<span class="fa fa-minus"></span>&nbsp;-->
+                                <!--<span data-translate="global.menu.entities.testSuit">Test Suit</span>-->
+                            <!--</a>-->
+                        <!--</li>-->
+                        <!--<li ui-sref-active="active">-->
+                            <!--<a ui-sref="swagger-apis" ng-click="vm.collapseNavbar()">-->
+                                <!--&lt;!&ndash;<span class="glyphicon glyphicon-asterisk"></span>&nbsp;&ndash;&gt;-->
+                                <!--<span class="fa fa-minus"></span>&nbsp;-->
+                                <!--<span data-translate="global.menu.entities.swaggerApis">Swagger Apis</span>-->
+                            <!--</a>-->
+                        <!--</li>-->
+                    </ul>
+                </li>
+                <li ui-sref-active="active" ng-switch-when="true"><a><i class="fa fa-minus"></i><span
+                    data-translate="leftList.autoPerformance.scriptTest">脚本测试</span></a>
+                </li>
+            </ul>
+        </li><!-- end of 性能自动化 -->
+
+
+
+        <li class="treeview"><!-- Environments -->
+            <a>
+                <i class="fa fa-th"></i><span
+                data-translate="leftList.environment.title">Environments</span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li ui-sref-active="active" ng-switch-when="true">
+                    <a ui-sref="server-jenkins" ng-click="vm.collapseNavbar()">
+                        <span class="fa fa-minus"></span>&nbsp;
+                        <span>Server配置</span>
+                    </a>
+                </li>
+                <li ui-sref-active="active" ng-switch-when="true">
+                    <a ui-sref="job-jenkins" ng-click="vm.collapseNavbar()">
+                        <span class="fa fa-minus"></span>&nbsp;
+                        <span>Job配置</span>
+                    </a>
+                </li>
+            </ul>
+        </li><!-- end of Environments -->
+
+    </ul>
+</div>

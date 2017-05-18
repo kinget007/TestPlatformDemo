@@ -1,0 +1,80 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myServerJenkinsLabel" data-translate="onePassApp.serverJenkins.home.createOrEditLabel">Create or edit a Server Jenkins</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.serverJenkins.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.serverJenkins.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="onePassApp.serverJenkins.description" for="field_description">Description</label>
+            <input type="text" class="form-control" name="description" id="field_description"
+                    ng-model="vm.serverJenkins.description"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="onePassApp.serverJenkins.urlJenkins" for="field_urlJenkins">Url Jenkins</label>
+            <input type="text" class="form-control" name="urlJenkins" id="field_urlJenkins"
+                    ng-model="vm.serverJenkins.urlJenkins"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="onePassApp.serverJenkins.loginJenkins" for="field_loginJenkins">Login Jenkins</label>
+            <input type="text" class="form-control" name="loginJenkins" id="field_loginJenkins"
+                    ng-model="vm.serverJenkins.loginJenkins"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="onePassApp.serverJenkins.pwdJenkins" for="field_pwdJenkins">Pwd Jenkins</label>
+            <input type="text" class="form-control" name="pwdJenkins" id="field_pwdJenkins"
+                    ng-model="vm.serverJenkins.pwdJenkins"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="onePassApp.serverJenkins.publicFlag" for="field_publicFlag">Public Flag</label>
+            <input type="text" class="form-control" name="publicFlag" id="field_publicFlag"
+                    ng-model="vm.serverJenkins.publicFlag"
+                     />
+        </div>
+        <!--<div class="form-group">-->
+            <!--<label class="control-label" data-translate="onePassApp.serverJenkins.userId" for="field_userId">User Id</label>-->
+            <!--<input type="text" class="form-control" name="userId" id="field_userId"-->
+                    <!--ng-model="vm.serverJenkins.userId"-->
+                     <!--/>-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+            <!--<label class="control-label" data-translate="onePassApp.serverJenkins.userName" for="field_userName">User Name</label>-->
+            <!--<input type="text" class="form-control" name="userName" id="field_userName"-->
+                    <!--ng-model="vm.serverJenkins.userName"-->
+                     <!--/>-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+            <!--<label class="control-label" data-translate="onePassApp.serverJenkins.status" for="field_status">Status</label>-->
+            <!--<input type="text" class="form-control" name="etc" id="field_status"-->
+                   <!--ng-model="vm.serverJenkins.status"-->
+            <!--/>-->
+        <!--</div>-->
+        <div class="form-group">
+            <label class="control-label" data-translate="onePassApp.serverJenkins.etc" for="field_etc">Etc</label>
+            <input type="text" class="form-control" name="etc" id="field_etc"
+                    ng-model="vm.serverJenkins.etc"
+                     />
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

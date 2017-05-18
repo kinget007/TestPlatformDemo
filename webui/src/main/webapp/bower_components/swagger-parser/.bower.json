@@ -1,0 +1,65 @@
+{
+  "name": "swagger-parser",
+  "description": "Swagger 2.0 parser and validator for Node and browsers",
+  "keywords": [
+    "swagger",
+    "json",
+    "yaml",
+    "parse",
+    "parser",
+    "validate",
+    "validator",
+    "validation",
+    "spec",
+    "specification",
+    "schema",
+    "reference",
+    "dereference"
+  ],
+  "authors": [
+    {
+      "name": "James Messinger",
+      "homepage": "http://jamesmessinger.com"
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/BigstickCarpet/swagger-parser",
+  "main": "dist/swagger-parser.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BigstickCarpet/swagger-parser.git"
+  },
+  "ignore": [
+    "/bower_components",
+    "/docs",
+    "/lib",
+    "/www",
+    "/dist/*.test.js",
+    "/tests",
+    "/karma.conf.js",
+    "/.*",
+    "/index.html",
+    "/package.json"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "ace-builds": "https://github.com/ajaxorg/ace-builds.git#~1.2.0",
+    "bootstrap-sass": "~3.3.5",
+    "jquery": "~2.1.4",
+    "chai": "*",
+    "mocha": "*",
+    "sinon-js": "*",
+    "superagent-dist": "*"
+  },
+  "version": "3.4.1",
+  "_release": "3.4.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "v3.4.1",
+    "commit": "0f06ec79bb5998bd1d8ec39a3f12607fe987ce71"
+  },
+  "_source": "https://github.com/BigstickCarpet/swagger-parser.git",
+  "_target": "^3.4.1",
+  "_originalSource": "swagger-parser",
+  "_direct": true
+}

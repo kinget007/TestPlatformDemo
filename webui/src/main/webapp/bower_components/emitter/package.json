@@ -1,0 +1,32 @@
+{
+  "name": "async-emitter",
+  "version": "1.5.3",
+  "description": "Asynchronous, non-blocking EventEmitter",
+  "author": "Jonas Hermsmeier <jhermsmeier@gmail.com> (https://jhermsmeier.de)",
+  "license": "MIT",
+  "keywords": [
+    "async",
+    "event",
+    "events",
+    "emitter"
+  ],
+  "main": "emitter.js",
+  "dependencies": {},
+  "devDependencies": {
+    "mocha": "~2.5.3"
+  },
+  "homepage": "https://github.com/jhermsmeier/emitter.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jhermsmeier/emitter.js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jhermsmeier/emitter.js/issues"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  }
+}

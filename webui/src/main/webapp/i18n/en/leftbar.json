@@ -1,0 +1,20 @@
+{
+    "leftList": {
+        "autoFunction": {
+            "title": "AutoFunction",
+            "unitTest": "UnitTest",
+            "apiTest": "ApiTest",
+            "scriptTest": "ScriptTest"
+        },
+        "autoPerformance": {
+            "title": "AutoPerformance",
+            "apiTest": "ApiTest",
+            "scriptTest": "ScriptTest"
+        },
+        "environment": {
+            "title": "Config Center",
+            "": "",
+            "": ""
+        }
+    }
+}

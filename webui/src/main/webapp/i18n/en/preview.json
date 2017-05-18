@@ -1,0 +1,16 @@
+{
+    "onePassApp": {
+        "preview" : {
+            "home": {
+                "title": "Preview"
+            },
+            "email":{
+                "title":"Send Email",
+                "senderEmail":"Sender Email",
+                "senderPwd":"Sender Pwd",
+                "emailGroup":"Email Group",
+                "action" :"Send"
+            }
+        }
+    }
+}

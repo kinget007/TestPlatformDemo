@@ -1,0 +1,27 @@
+version: '2'
+services:
+    onepass-cassandra:
+        container_name: onepass-cassandra
+        image: cassandra:3.9
+        # volumes:
+        #     - ~/volumes/jhipster/onepass/cassandra/:/var/lib/cassandra/data
+        ports:
+            - 7000:7000
+            - 7001:7001
+            - 7199:7199
+            - 9042:9042
+            - 9160:9160
+    onepass-cassandra-node:
+        image: cassandra:3.9
+        links:
+            - onepass-cassandra:seed
+        environment:
+            - CASSANDRA_SEEDS=seed
+    onepass-cassandra-migration:
+        extends:
+            file: cassandra-migration.yml
+            service: onepass-cassandra-migration
+        links:
+            - onepass-cassandra
+        environment:
+            - CREATE_KEYSPACE_SCRIPT=create-keyspace-prod.cql

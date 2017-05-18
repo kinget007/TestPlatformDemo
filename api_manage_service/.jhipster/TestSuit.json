@@ -1,0 +1,36 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "swaggerUri",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "dependOn",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "projectId",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "projectDescription",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "etc",
+            "fieldType": "String"
+        }
+    ],
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "test_suit",
+    "pagination": "no",
+    "microserviceName": "apimanageservice",
+    "searchEngine": false
+}

@@ -1,0 +1,55 @@
+
+<div>
+    <h2><span data-translate="onePassApp.serverJenkins.detail.title">Server Jenkins</span> {{vm.serverJenkins.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="onePassApp.serverJenkins.description">Description</span></dt>
+        <dd>
+            <span>{{vm.serverJenkins.description}}</span>
+        </dd>
+        <dt><span data-translate="onePassApp.serverJenkins.urlJenkins">Url Jenkins</span></dt>
+        <dd>
+            <span>{{vm.serverJenkins.urlJenkins}}</span>
+        </dd>
+        <dt><span data-translate="onePassApp.serverJenkins.loginJenkins">Login Jenkins</span></dt>
+        <dd>
+            <span>{{vm.serverJenkins.loginJenkins}}</span>
+        </dd>
+        <dt><span data-translate="onePassApp.serverJenkins.pwdJenkins">Pwd Jenkins</span></dt>
+        <dd>
+            <span>{{vm.serverJenkins.pwdJenkins}}</span>
+        </dd>
+        <dt><span data-translate="onePassApp.serverJenkins.publicFlag">Public Flag</span></dt>
+        <dd>
+            <span>{{vm.serverJenkins.publicFlag}}</span>
+        </dd>
+        <dt><span data-translate="onePassApp.serverJenkins.userId">User Id</span></dt>
+        <dd>
+            <span>{{vm.serverJenkins.userId}}</span>
+        </dd>
+        <dt><span data-translate="onePassApp.serverJenkins.userName">User Name</span></dt>
+        <dd>
+            <span>{{vm.serverJenkins.userName}}</span>
+        </dd>
+        <dt><span data-translate="onePassApp.serverJenkins.status">Status</span></dt>
+        <dd>
+            <span>{{vm.serverJenkins.status}}</span>
+        </dd>
+        <!--<dt><span data-translate="onePassApp.serverJenkins.etc">Etc</span></dt>-->
+        <!--<dd>-->
+            <!--<span>{{vm.serverJenkins.etc}}</span>-->
+        <!--</dd>-->
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="server-jenkins-detail.edit({id:vm.serverJenkins.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

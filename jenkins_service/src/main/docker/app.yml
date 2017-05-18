@@ -1,0 +1,23 @@
+version: '2'
+services:
+    jenkinsservice-app:
+        image: jenkinsservice
+        external_links:
+            - jenkinsservice-mongodb:mongodb
+            - jhipster-registry:registry
+        environment:
+            - SPRING_PROFILES_ACTIVE=prod,swagger
+            - SPRING_CLOUD_CONFIG_URI=http://admin:admin@registry:8761/config
+            - SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017
+            - SPRING_DATA_MONGODB_DATABASE=jenkinsservice
+            - JHIPSTER_SLEEP=10 # gives time for the database to boot before the application
+    jenkinsservice-mongodb:
+        extends:
+            file: mongodb.yml
+            service: jenkinsservice-mongodb
+    jhipster-registry:
+        extends:
+            file: jhipster-registry.yml
+            service: jhipster-registry
+        environment:
+            - SPRING_CLOUD_CONFIG_SERVER_NATIVE_SEARCH_LOCATIONS=file:./central-config/docker-config/

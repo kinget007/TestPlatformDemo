@@ -1,0 +1,44 @@
+#-------------------------------------------------------------------------------
+# Note for using the rate-limiting:
+#   The comment part won't be copied if you use the subgenerator docker-compose
+#   you have to manually copy it
+#-------------------------------------------------------------------------------
+version: '2'
+services:
+    gateway-app:
+        image: gateway
+        external_links:
+            - gateway-mongodb:mongodb
+            # Uncomment to have Cassandra working with the gateway
+            # - gateway-cassandra:cassandra
+            - jhipster-registry:registry
+        environment:
+            - SPRING_PROFILES_ACTIVE=prod,swagger
+            - SPRING_CLOUD_CONFIG_URI=http://admin:admin@registry:8761/config
+            - SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017
+            - SPRING_DATA_MONGODB_DATABASE=gateway
+            - SPRING_DATA_CASSANDRA_CONTACTPOINTS=cassandra
+            - JHIPSTER_SLEEP=80 # gives time for uaa and the Cassandra cluster to start and execute the migration scripts
+        ports:
+            - 8080:8080
+    gateway-mongodb:
+        extends:
+            file: mongodb.yml
+            service: gateway-mongodb
+    # Uncomment to have Cassandra working with the gateway
+    # gateway-cassandra:
+    #     extends:
+    #         file: cassandra-cluster.yml
+    #         service: gateway-cassandra
+    # gateway-cassandra-migration:
+    #     extends:
+    #         file: cassandra-migration.yml
+    #         service: gateway-cassandra-migration
+    #     environment:
+    #         - CREATE_KEYSPACE_SCRIPT=create-keyspace-prod.cql
+    jhipster-registry:
+        extends:
+            file: jhipster-registry.yml
+            service: jhipster-registry
+        environment:
+            - SPRING_CLOUD_CONFIG_SERVER_NATIVE_SEARCH_LOCATIONS=file:./central-config/docker-config/

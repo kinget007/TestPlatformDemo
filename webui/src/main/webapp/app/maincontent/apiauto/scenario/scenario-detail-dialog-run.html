@@ -1,0 +1,87 @@
+<form name="runForm" role="form" novalidate>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title">RESPONSE</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel-group" id="panel_result">
+                        <div class="panel panel-default" ng-repeat="(orderNum,ScenarioApiInfoResult) in requestAll">
+                            <div class="panel-heading">
+                                <a class="panel-title collapsed" data-toggle="collapse" data-parent="#panel_result" href="/#/scenario-list/{{scenarioId}}#panel_result_{{orderNum}}">
+                                    <span class="col-lg-1">{{orderNum}}</span>
+                                    <span class="col-lg-1">{{ScenarioApiInfoResult.httpMethod}}</span>
+                                    <span class="col-lg-9">{{ScenarioApiInfoResult.scheme}}://{{ScenarioApiInfoResult.host}}{{ScenarioApiInfoResult.basePath}}{{ScenarioApiInfoResult.pathUrl}}</span>
+                                    <span>{{getResultFromResponse(ScenarioApiInfoResult.checks)}}</span>
+                                </a>
+                            </div>
+
+                            <div id="panel_result_{{orderNum}}" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div>
+                                                <div ng-jsoneditor="onLoad" ng-model="ScenarioApiInfoResult.response" prefer-text="true" options="{mode:'tree'}" style="height: 250px;"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12" ng-hide="{{ScenarioApiInfoResult.checks.length==0}}">
+                                            <div class="margin">
+                                                <table class="table table-condensed" id="myChecks_result_{{orderNum}}">
+                                                    <tbody>
+                                                    <tr class="btn-instagram">
+                                                        <th>Field Name</th>
+                                                        <th>Method</th>
+                                                        <th>Target Field</th>
+                                                        <th>Expect</th>
+                                                        <th>Status</th>
+                                                    </tr>
+                                                    <tr ng-repeat="check in ScenarioApiInfoResult.checks">
+                                                        <td class="col-md-3"><input type="text" class="form-control" value="{{check.field}}"></td>
+                                                        <td>
+                                                            <select id="CheckMethodSelect" class="form-control select2" style="width: 100%;" ng-model="SchemeSelect">
+                                                                <option ng-selected="true">{{check.checkMethod}}</option>
+                                                                <option>Save</option>
+                                                                <option>Equal</option>
+                                                                <option>Contain</option>
+                                                                <option>IsNull</option>
+                                                                <option>IsNotContain</option>
+                                                                <option>HasItem</option>
+                                                                <option>DoNotHasItem</option>
+                                                            </select>
+                                                        </td>
+                                                        <td class="col-md-3"><input type="text" class="form-control" value="{{check.targetField}}"></td>
+                                                        <td class="col-md-3"><input type="text" class="form-control" value="{{check.expect}}"></td>
+                                                        <td class="col-md-1"><input type="text" class="form-control" value="{{check.status}}"></td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                                <!--@*<div ng-jsoneditor="onLoad" ng-model="editor_code.data" options="editor_code.options" style="height: 250px;"></div>*@-->
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- /.col-md-12 -->
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span
+            data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="button" ng-disabled="runForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>
+

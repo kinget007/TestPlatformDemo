@@ -1,0 +1,30 @@
+{
+    "onePassApp": {
+        "jobJenkins" : {
+            "home": {
+                "title": "Job Jenkins",
+                "createLabel": "Create a new Job Jenkins",
+                "createOrEditLabel": "Create or edit a Job Jenkins",
+                "search": "Search for Job Jenkins"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Job Jenkins {{ id }}?"
+            },
+            "detail": {
+                "title": "Job Jenkins"
+            },
+            "description": "Description",
+            "urlJenkins": "Url Jenkins",
+            "serverIdJenkins": "Server Id Jenkins",
+            "folderJenkins": "Folder Jenkins",
+            "etc":"Etc"
+        }
+    },
+    "jenkinsserviceApp": {
+        "jobJenkins" : {
+            "created": "A new Job Jenkins is created with identifier {{ param }}",
+            "updated": "A Job Jenkins is updated with identifier {{ param }}",
+            "deleted": "A Job Jenkins is deleted with identifier {{ param }}"
+        }
+    }
+}

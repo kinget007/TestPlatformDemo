@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
+<html>
+<head>
+    <meta charset="utf-8">
+    <!--<meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+    <title>OnePass</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- content -->
+    <link rel="stylesheet" href="content/css/vendor.css">
+    <link rel="stylesheet" href="content/css/main.css">
+    <link rel="stylesheet" href="content/css/datepicker.css">
+    <!--<link rel="stylesheet" href="content/css/docmd.css">-->
+    <!--<link rel="stylesheet" href="content/css/docs.css">-->
+
+    <!-- Bootstrap 3.3.6 -->
+    <link rel="stylesheet" href="bower_components/AdminLTE/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="bower_components/AdminLTE/plugins/awesome/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="bower_components/AdminLTE/plugins/ionicons/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="bower_components/AdminLTE/dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. We have chosen the skin-blue for this starter page. -->
+    <link rel="stylesheet" href="bower_components/AdminLTE/dist/css/skins/skin-blue.min.css">
+    <!-- angular-editable style-->
+    <link href="bower_components/angular-xeditable/dist/css/xeditable.css" rel="stylesheet"/>
+
+    <link href="bower_components/jsoneditor/dist/jsoneditor.css" rel="stylesheet"/>
+
+    <!--select2-->
+    <link href="bower_components/select2/dist/css/select2.min.css" rel="stylesheet" />
+
+    <!--fancytree-->
+    <link rel="stylesheet" href="bower_components/jquery.fancytree/dist/skin-bootstrap/ui.fancytree.css">
+
+    <!--Bootstrap slider-->
+    <!--<link rel="stylesheet" type="text/css" href="bower_components/angularjs-slider/dist/rzslider.css"/>-->
+
+</head>
+<!--
+BODY TAG OPTIONS:
+=================
+Apply one or more of the following classes to get the
+desired effect
+|---------------------------------------------------------|
+| SKINS         | skin-blue                               |
+|               | skin-black                              |
+|               | skin-purple                             |
+|               | skin-yellow                             |
+|               | skin-red                                |
+|               | skin-green                              |
+|---------------------------------------------------------|
+|LAYOUT OPTIONS | fixed                                   |
+|               | layout-boxed                            |
+|               | layout-top-nav                          |
+|               | sidebar-collapse                        |
+|               | sidebar-mini                            |
+|---------------------------------------------------------|
+-->
+<body class="hold-transition skin-blue sidebar-mini" ng-app="webuiApp" ng-strict-di>
+
+<!--<body class="skin-blue fixed" ng-app="onepassApp" ng-strict-di>-->
+<div class="wrapper">
+    <!-- Main Header -->
+    <header class="main-header">
+
+        <!-- Logo -->
+        <a class="logo">
+            <!-- mini logo for sidebar mini 50x50 pixels -->
+            <span class="logo-mini"><b>W</b>eb</span>
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg"><b>Web</b>UI</span>
+        </a>
+
+        <!-- Header Navbar -->
+        <nav class="navbar navbar-static-top" role="navigation">
+            <!-- Sidebar toggle button-->
+            <a class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                <span class="sr-only">Toggle navigation</span>
+            </a>
+            <!--Navbar Right Menu -->
+            <div class="navbar-custom-menu">
+                <page-ribbon ng-hide="true"></page-ribbon>
+                <div ui-view="navbar" ng-cloak></div>
+            </div>
+        </nav>
+    </header>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar">
+
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+            <!-- Sidebar Menu -->
+            <!--<page-ribbon ng-hide="true"></page-ribbon>-->
+            <div ui-view="leftbar" ng-cloak></div>
+            <!-- /.sidebar-menu -->
+        </section>
+        <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header-->
+        <!--<section class="content-header">-->
+        <!--<h1>-->
+
+        <!--<small></small>-->
+        <!--</h1>-->
+        <!--&lt;!&ndash;<ol class="breadcrumb">&ndash;&gt;-->
+        <!--&lt;!&ndash;<li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>&ndash;&gt;-->
+        <!--&lt;!&ndash;<li class="active">Here</li>&ndash;&gt;-->
+        <!--&lt;!&ndash;</ol>&ndash;&gt;-->
+        <!--</section>-->
+
+        <!-- Main content -->
+        <section class="content">
+            <!-- Your Page Content Here -->
+            <div class="well" ui-view="content">
+                <!-- Angular views -->
+            </div>
+
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- Main Footer -->
+    <footer class="main-footer">
+        <!-- To the right -->
+        <div class="pull-right hidden-xs">
+            <span data-translate="global.title">WebUI</span> <span class="navbar-version">v{{VERSION}}</span>
+        </div>
+        <!-- To the left -->
+        <strong>Copyright &copy; 2016 <a href="#">xxxxx</a>.</strong> All rights reserved.
+    </footer>
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED JS SCRIPTS -->
+
+<!-- jQuery 2.2.3 -->
+<script src="bower_components/AdminLTE/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<!-- Bootstrap 3.3.6 -->
+<!--<script src="bower_components/AdminLTE/bootstrap/js/bootstrap.min.js"></script>-->
+
+
+<!-- build:js app/vendor.js -->
+<!-- bower:js -->
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/messageformat/messageformat.js"></script>
+<script src="bower_components/json3/lib/json3.js"></script>
+<script src="bower_components/AdminLTE/dist/js/app.js"></script>
+<script src="bower_components/swagger-js/browser/swagger-client.js"></script>
+<script src="bower_components/swagger-parser/dist/swagger-parser.js"></script>
+<script src="bower_components/jsoneditor/dist/jsoneditor.min.js"></script>
+<script src="bower_components/select2/dist/js/select2.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="bower_components/jquery-ui/jquery-ui.js"></script>
+<script src="bower_components/moment/moment.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-aria/angular-aria.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="bower_components/angular-cache-buster/angular-cache-buster.js"></script>
+<script src="bower_components/angular-cookies/angular-cookies.js"></script>
+<script src="bower_components/angular-dynamic-locale/src/tmhDynamicLocale.js"></script>
+<script src="bower_components/ngstorage/ngStorage.js"></script>
+<script src="bower_components/angular-loading-bar/build/loading-bar.js"></script>
+<script src="bower_components/angular-resource/angular-resource.js"></script>
+<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="bower_components/angular-translate/angular-translate.js"></script>
+<script src="bower_components/angular-translate-interpolation-messageformat/angular-translate-interpolation-messageformat.js"></script>
+<script src="bower_components/angular-translate-loader-partial/angular-translate-loader-partial.js"></script>
+<script src="bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js"></script>
+<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="bower_components/bootstrap-ui-datetime-picker/dist/datetime-picker.js"></script>
+<script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
+<script src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
+<script src="bower_components/angular-xeditable/dist/js/xeditable.js"></script>
+<script src="bower_components/ng-jsoneditor/ng-jsoneditor.min.js"></script>
+<script src="bower_components/bootstrap-treeview/dist/bootstrap-treeview.min.js"></script>
+<script src="bower_components/jquery.fancytree/dist/jquery.fancytree-all.js"></script>
+<script src="bower_components/angular-moment/angular-moment.js"></script>
+<!-- endinject -->
+<!-- endbuild -->
+
+<!-- build:js app/app.js  -->
+<!-- inject:js -->
+<script src="app/app.module.js"></script>
+<script src="app/services/user/user.service.js"></script>
+<script src="app/services/profiles/profile.service.js"></script>
+<script src="app/services/profiles/page-ribbon.directive.js"></script>
+<script src="app/services/auth/register.service.js"></script>
+<script src="app/services/auth/principal.service.js"></script>
+<script src="app/services/auth/password-reset-init.service.js"></script>
+<script src="app/services/auth/password-reset-finish.service.js"></script>
+<script src="app/services/auth/password.service.js"></script>
+<script src="app/services/auth/has-authority.directive.js"></script>
+<script src="app/services/auth/has-any-authority.directive.js"></script>
+<script src="app/services/auth/auth.service.js"></script>
+<script src="app/services/auth/auth.jwt.service.js"></script>
+<script src="app/services/auth/activate.service.js"></script>
+<script src="app/services/auth/account.service.js"></script>
+<script src="app/services/apis/apimanageResources.js"></script>
+<script src="app/maincontent/jenkinsjob/server-jenkins/server-jenkins-dialog.controller.js"></script>
+<script src="app/maincontent/jenkinsjob/server-jenkins/server-jenkins-detail.controller.js"></script>
+<script src="app/maincontent/jenkinsjob/server-jenkins/server-jenkins-delete-dialog.controller.js"></script>
+<script src="app/maincontent/jenkinsjob/server-jenkins/server-jenkins.state.js"></script>
+<script src="app/maincontent/jenkinsjob/server-jenkins/server-jenkins.service.js"></script>
+<script src="app/maincontent/jenkinsjob/server-jenkins/server-jenkins.controller.js"></script>
+<script src="app/maincontent/jenkinsjob/job-jenkins/job-jenkins-dialog.controller.js"></script>
+<script src="app/maincontent/jenkinsjob/job-jenkins/job-jenkins-detail.controller.js"></script>
+<script src="app/maincontent/jenkinsjob/job-jenkins/job-jenkins-delete-dialog.controller.js"></script>
+<script src="app/maincontent/jenkinsjob/job-jenkins/job-jenkins.state.js"></script>
+<script src="app/maincontent/jenkinsjob/job-jenkins/job-jenkins.service.js"></script>
+<script src="app/maincontent/jenkinsjob/job-jenkins/job-jenkins.controller.js"></script>
+<script src="app/maincontent/jenkinsjob/job-jenkins/jenkins-job.service.js"></script>
+<script src="app/maincontent/jenkinsjob/jenkins.state.js"></script>
+<script src="app/maincontent/autofunction/unittest/unittest.controller.js"></script>
+<script src="app/maincontent/autofunction/unittest/unitest.state.js"></script>
+<script src="app/maincontent/autofunction/scripttest/scripttest.state.js"></script>
+<script src="app/maincontent/autofunction/scripttest/scripttest.controller.js"></script>
+<script src="app/maincontent/autofunction/apitest/apitest.state.js"></script>
+<script src="app/maincontent/apimanage/test-suit/test-suit-dialog.controller.js"></script>
+<script src="app/maincontent/apimanage/test-suit/test-suit-detail.controller.js"></script>
+<script src="app/maincontent/apimanage/test-suit/test-suit-delete-dialog.controller.js"></script>
+<script src="app/maincontent/apimanage/test-suit/test-suit.state.js"></script>
+<script src="app/maincontent/apimanage/test-suit/test-suit.service.js"></script>
+<script src="app/maincontent/apimanage/test-suit/test-suit.controller.js"></script>
+<script src="app/maincontent/apimanage/apimanage.state.js"></script>
+<script src="app/maincontent/apimanage/api-postman/api-postman.state.js"></script>
+<script src="app/maincontent/apimanage/api-postman/api-postman.controller.js"></script>
+<script src="app/maincontent/apimanage/api-manage/api-manage.state.js"></script>
+<script src="app/maincontent/apimanage/api-manage/api-manage.controller.js"></script>
+<script src="app/maincontent/apimanage/api-doc/api-doc.state.js"></script>
+<script src="app/maincontent/apiauto/scenario/scenario-list-dialog.controller.js"></script>
+<script src="app/maincontent/apiauto/scenario/scenario-list.controller.js"></script>
+<script src="app/maincontent/apiauto/scenario/scenario-detail-dialog-run.controller.js"></script>
+<script src="app/maincontent/apiauto/scenario/scenario-detail-dialog.controller.js"></script>
+<script src="app/maincontent/apiauto/scenario/scenario-detail.controller.js"></script>
+<script src="app/maincontent/apiauto/scenario/scenario.state.js"></script>
+<script src="app/maincontent/apiauto/apidoc/apidoc-dialog.controller.js"></script>
+<script src="app/maincontent/apiauto/apidoc/apidoc.state.js"></script>
+<script src="app/maincontent/apiauto/apidoc/apidoc.controller.js"></script>
+<script src="app/maincontent/apiauto/apiauto.state.js"></script>
+<script src="app/layouts/navbar/navbar.controller.js"></script>
+<script src="app/layouts/navbar/active-menu.directive.js"></script>
+<script src="app/layouts/leftbar/leftbar.state.js"></script>
+<script src="app/layouts/leftbar/leftbar.controller.js"></script>
+<script src="app/layouts/error/error.state.js"></script>
+<script src="app/home/home.state.js"></script>
+<script src="app/home/home.controller.js"></script>
+<script src="app/entities/entity.state.js"></script>
+<script src="app/components/util/truncate-words.filter.js"></script>
+<script src="app/components/util/truncate-characters.filter.js"></script>
+<script src="app/components/util/sort-by.directive.js"></script>
+<script src="app/components/util/sort.directive.js"></script>
+<script src="app/components/util/parse-links.service.js"></script>
+<script src="app/components/util/pagination-util.service.js"></script>
+<script src="app/components/util/jhi-item-count.directive.js"></script>
+<script src="app/components/util/date-util.service.js"></script>
+<script src="app/components/util/data-util.service.js"></script>
+<script src="app/components/util/capitalize.filter.js"></script>
+<script src="app/components/util/base64.service.js"></script>
+<script src="app/components/login/login.service.js"></script>
+<script src="app/components/login/login.controller.js"></script>
+<script src="app/components/language/language.service.js"></script>
+<script src="app/components/language/language.filter.js"></script>
+<script src="app/components/language/language.controller.js"></script>
+<script src="app/components/language/language.constants.js"></script>
+<script src="app/components/form/show-validation.directive.js"></script>
+<script src="app/components/form/pagination.constants.js"></script>
+<script src="app/components/form/minbytes.directive.js"></script>
+<script src="app/components/form/maxbytes.directive.js"></script>
+<script src="app/components/alert/alert-error.directive.js"></script>
+<script src="app/components/alert/alert.service.js"></script>
+<script src="app/components/alert/alert.directive.js"></script>
+<script src="app/blocks/interceptor/notification.interceptor.js"></script>
+<script src="app/blocks/interceptor/errorhandler.interceptor.js"></script>
+<script src="app/blocks/interceptor/auth-expired.interceptor.js"></script>
+<script src="app/blocks/interceptor/auth.interceptor.js"></script>
+<script src="app/blocks/handlers/translation.handler.js"></script>
+<script src="app/blocks/handlers/state.handler.js"></script>
+<script src="app/blocks/config/uib-pagination.config.js"></script>
+<script src="app/blocks/config/uib-pager.config.js"></script>
+<script src="app/blocks/config/translation-storage.provider.js"></script>
+<script src="app/blocks/config/translation.config.js"></script>
+<script src="app/blocks/config/localstorage.config.js"></script>
+<script src="app/blocks/config/http.config.js"></script>
+<script src="app/blocks/config/compile.config.js"></script>
+<script src="app/blocks/config/alert.config.js"></script>
+<script src="app/app.state.js"></script>
+<script src="app/app.constants.js"></script>
+<script src="app/admin/user-management/user-management-dialog.controller.js"></script>
+<script src="app/admin/user-management/user-management-detail.controller.js"></script>
+<script src="app/admin/user-management/user-management-delete-dialog.controller.js"></script>
+<script src="app/admin/user-management/user-management.state.js"></script>
+<script src="app/admin/user-management/user-management.controller.js"></script>
+<script src="app/admin/metrics/metrics.state.js"></script>
+<script src="app/admin/metrics/metrics.service.js"></script>
+<script src="app/admin/metrics/metrics.modal.controller.js"></script>
+<script src="app/admin/metrics/metrics.controller.js"></script>
+<script src="app/admin/logs/logs.state.js"></script>
+<script src="app/admin/logs/logs.service.js"></script>
+<script src="app/admin/logs/logs.controller.js"></script>
+<script src="app/admin/health/health.state.js"></script>
+<script src="app/admin/health/health.service.js"></script>
+<script src="app/admin/health/health.modal.controller.js"></script>
+<script src="app/admin/health/health.controller.js"></script>
+<script src="app/admin/gateway/gateway.state.js"></script>
+<script src="app/admin/gateway/gateway.routes.service.js"></script>
+<script src="app/admin/gateway/gateway.controller.js"></script>
+<script src="app/admin/docs/docs.state.js"></script>
+<script src="app/admin/configuration/configuration.state.js"></script>
+<script src="app/admin/configuration/configuration.service.js"></script>
+<script src="app/admin/configuration/configuration.controller.js"></script>
+<script src="app/admin/audits/audits.state.js"></script>
+<script src="app/admin/audits/audits.service.js"></script>
+<script src="app/admin/audits/audits.controller.js"></script>
+<script src="app/admin/admin.state.js"></script>
+<script src="app/account/settings/settings.state.js"></script>
+<script src="app/account/settings/settings.controller.js"></script>
+<script src="app/account/reset/request/reset.request.state.js"></script>
+<script src="app/account/reset/request/reset.request.controller.js"></script>
+<script src="app/account/reset/finish/reset.finish.state.js"></script>
+<script src="app/account/reset/finish/reset.finish.controller.js"></script>
+<script src="app/account/register/register.state.js"></script>
+<script src="app/account/register/register.controller.js"></script>
+<script src="app/account/password/password-strength-bar.directive.js"></script>
+<script src="app/account/password/password.state.js"></script>
+<script src="app/account/password/password.controller.js"></script>
+<script src="app/account/activate/activate.state.js"></script>
+<script src="app/account/activate/activate.controller.js"></script>
+<script src="app/account/account.state.js"></script>
+<!-- endinject -->
+<!-- endbuild -->
+</body>
+</html>

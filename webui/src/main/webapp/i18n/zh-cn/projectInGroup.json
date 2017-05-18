@@ -1,0 +1,23 @@
+{
+    "onePassApp": {
+        "projectInGroup" : {
+            "home": {
+                "title": "项目信息",
+                "createLabel": "添加一个项目到项目组",
+                "createOrEditLabel": "添加或者修改项目信息",
+                "search": "检索项目信息"
+            },
+            "created": "项目信息添加成功 {{ param }}",
+            "updated": "项目信息更新成功 {{ param }}",
+            "deleted": "项目信息删除成功 {{ param }}",
+            "delete": {
+                "question": "时候确定删除该项目信息 {{ id }}?"
+            },
+            "detail": {
+                "title": "项目信息"
+            },
+            "description": "描述信息",
+            "groupId": "项目组标识"
+        }
+    }
+}

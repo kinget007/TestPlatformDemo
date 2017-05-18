@@ -1,0 +1,47 @@
+<div>
+<h2>场景添加</h2>
+<jhi-alert></jhi-alert>
+<div class="row">
+    <div ng-repeat="simpleScenario in simpleScenarios">
+        <a ui-sref="scenario-detail({id:simpleScenario._id})">
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-aqua">
+                    <div class="inner">
+                        <h4>{{simpleScenario.scenarioName}}</h4>
+                        <p>{{simpleScenario.tagName}}</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-android-open"></i>
+                    </div>
+                    <p class="small-box-footer">More info<i class="fa fa-arrow-circle-right"></i></p>
+                </div>
+            </div> <!-- ./col -->
+        </a>
+    </div>
+
+    <!--<button type="submit"-->
+            <!--ui-sref="issue-in-project.edit({id:issueInProject.id})"-->
+            <!--class="btn btn-primary btn-sm">-->
+        <!--<span class="glyphicon glyphicon-pencil"></span>-->
+        <!--<span class="hidden-xs hidden-sm" data-translate="entity.action.edit"></span>-->
+    <!--</button>-->
+
+    <a ui-sref="scenario-list.new">
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-aqua-gradient">
+                <div class="inner">
+                    <h4>Add</h4>
+                    <p>version</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-android-add"></i>
+                </div>
+                <p class="small-box-footer">More info<i class="fa fa-arrow-circle-right"></i></p>
+                <!--@*<a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>*@-->
+            </div>
+        </div><!-- ./col -->
+    </a>
+</div>
+</div>

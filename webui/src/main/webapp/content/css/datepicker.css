@@ -1,0 +1,26 @@
+.form-horizontal {
+    width:500px;
+}
+
+.datetime-picker-dropdown {
+
+}
+
+.datetime-picker-dropdown > li.date-picker-menu div > table .btn-default {
+    border: 0;
+}
+
+.datetime-picker-dropdown > li.time-picker-menu div > table {
+
+}
+
+.full button span {
+    background-color: limegreen;
+    border-radius: 32px;
+    color: black;
+}
+.partially button span {
+    background-color: orange;
+    border-radius: 32px;
+    color: black;
+}

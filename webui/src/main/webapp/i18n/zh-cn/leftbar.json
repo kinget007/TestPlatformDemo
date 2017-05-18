@@ -1,0 +1,20 @@
+{
+    "leftList": {
+        "autoFunction": {
+            "title": "版本基线自动化",
+            "unitTest": "单元测试",
+            "apiTest": "Api测试",
+            "scriptTest": "脚本测试"
+        },
+        "autoPerformance": {
+            "title": "性能自动化",
+            "apiTest": "Api测试",
+            "scriptTest": "脚本测试"
+        },
+        "environment": {
+            "title": "配置中心",
+            "": "",
+            "": ""
+        }
+    }
+}

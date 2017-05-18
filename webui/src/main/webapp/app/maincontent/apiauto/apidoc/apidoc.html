@@ -1,0 +1,152 @@
+<style>
+    .dropdown-submenu {
+        position: relative;
+    }
+
+    .dropdown-submenu > .dropdown-menu {
+        top: 0;
+        left: 100%;
+        margin-top: -6px;
+        margin-left: -1px;
+        -webkit-border-radius: 0 6px 6px 6px;
+        -moz-border-radius: 0 6px 6px;
+        border-radius: 0 6px 6px 6px;
+    }
+
+    .dropdown-submenu:hover > .dropdown-menu {
+        display: block;
+    }
+
+    .dropdown-submenu > a:after {
+        display: block;
+        content: " ";
+        float: right;
+        width: 0;
+        height: 0;
+        border-color: transparent;
+        border-style: solid;
+        border-width: 5px 0 5px 5px;
+        border-left-color: #ccc;
+        margin-top: 5px;
+        margin-right: -10px;
+    }
+
+    .dropdown-submenu:hover > a:after {
+        border-left-color: #fff;
+
+    }
+
+    .dropdown-submenu.pull-left {
+        float: none;
+    }
+
+    .dropdown-submenu.pull-left > .dropdown-menu {
+        left: -100%;
+        margin-left: 10px;
+        -webkit-border-radius: 6px 0 6px 6px;
+        -moz-border-radius: 6px 0 6px 6px;
+        border-radius: 6px 0 6px 6px;
+    }
+</style>
+<div>
+    <div class="pull-left header">
+        <div class="dropdown">
+            <button type="button" class="btn btn-default btn-sm dropdown-toggle"
+                    data-toggle="dropdown">
+                <span class="fa fa-align-left"></span>
+                <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+                <li class="dropdown-submenu">
+                    <a tabindex="-1">Switch</a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-submenu" ng-repeat="apiDocTitleVersion in apiDocTitleVersions">
+                            <a>{{ apiDocTitleVersion._id }}</a>
+                            <ul class="dropdown-menu">
+                                <li><a tabindex="-1" ng-repeat="version in apiDocTitleVersion.versions" ng-click="selectApiDocByTitleAndVersion(apiDocTitleVersion._id,version)">{{ version }}</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a tabindex="-1" ui-sref="apidoc-dialog">Import</a>
+                    <!--<a data-toggle="modal" data-target="#importModal">Import</a>-->
+                </li>
+
+            </ul>
+        </div>
+    </div>
+    <h2>用例管理</h2>
+
+    <jhi-alert></jhi-alert>
+    <div ng-repeat="(path,operation) in apiDoc.paths">
+        <div ng-repeat="(method,apiInfo) in operation" ng-if="apiInfo!=null">
+            <div class="box box-default collapsed-box">
+                <div class="box-header with-border">
+                    <span class="col-lg-3">{{apiInfo.summary}}</span>
+                    <span class="col-lg-2">{{method}}</span>
+                    <span>{{apiDoc.host}}{{apiDoc.basePath}}{{path}}</span>
+                    <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
+                    </div> <!-- /.box-tools -->
+                </div> <!-- /.box-header -->
+                <div class="box-body">
+                    <h3><b>参数列表:</b></h3>
+                    <table style="width: 100%">
+                        <thead>
+                        <tr>
+                            <th> Name</th>
+                            <th> Type</th>
+                            <th> Required</th>
+                            <th> Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="paramter in apiInfo.parameters">
+                            <td> {{paramter.name}}</td>
+                            <td> {{paramter.type}}</td>
+                            <td> {{paramter.required}}</td>
+                            <td> {{paramter.description}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <h3><b>返回格式:</b></h3>
+                    <pre class="hierarchy bring-up">
+                            <code class="language-bash" data-lang="bash">{{apiInfo.responses | json}}</code>
+                        </pre>
+                </div> <!-- /.box-body -->
+            </div> <!-- /.box -->
+        </div>
+    </div>
+</div>
+
+<!--models-->
+<div class="modal fade" id="importModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Import</h4>
+            </div>
+            <div class="modal-body">
+                <!--<div class="alert alert-info">-->
+                    <!--Support for Swagger file type will be added soon!-->
+                <!--</div>-->
+                <!--<br>-->
+                <!--<input type="file" name="file" id="importFileId" class="form-control">-->
+                <!--<br>-->
+                <input type="text" class="form-control" name="swaggerUrl" id="swaggerUrl" placeholder="Please input swaggerDoc Url like 'http://www.application/v2/api-docs'">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Save</button>
+
+                <!--<button id="importSwaggerFileBtn" type="button" class="btn">Swagger</button>-->
+                <!--<button id="importPostmanFileBtn" type="button" class="btn">Postman</button>-->
+                <!--<button id="importRamlFileBtn" type="button" class="btn">RAML</button>-->
+            </div>
+        </div>
+    </div>
+</div>

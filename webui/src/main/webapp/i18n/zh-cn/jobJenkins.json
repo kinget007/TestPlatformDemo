@@ -1,0 +1,30 @@
+{
+    "onePassApp": {
+        "jobJenkins" : {
+            "home": {
+                "title": "Jenkins Jobs",
+                "createLabel": "添加一个Jenkins Job",
+                "createOrEditLabel": "添加或者修改Jenkins Job",
+                "search": "搜索 Jenkins Job"
+            },
+            "delete": {
+                "question": "时候确定删除该 Jenkins Job {{ id }}?"
+            },
+            "detail": {
+                "title": "Jenkins Jobs"
+            },
+            "description": "描述信息",
+            "urlJenkins": "Jenkins URL",
+            "serverIdJenkins": "Jenkins Server Id ",
+            "folderJenkins": "Jenkins Folder Name",
+            "etc": "Etc"
+        }
+    },
+    "jenkinsserviceApp": {
+        "jobJenkins" : {
+            "created": "新的Jenkins Job添加成功 {{ param }}",
+            "updated": "新的Jenkins Job更新成功 {{ param }}",
+            "deleted": "新的Jenkins Job删除成功 {{ param }}"
+        }
+    }
+}
