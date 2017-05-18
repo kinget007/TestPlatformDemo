@@ -10,10 +10,6 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by king.yu on 2017/1/9.
- */
-
 public class AssertHandler{
     private final Logger log = LoggerFactory.getLogger(BodyAssert.class);
 

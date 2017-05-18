@@ -1,8 +1,5 @@
 package com.king.yyl.web.rest.util;
 
-/**
- * Created by king.yu on 2016/12/12.
- */
 
 import java.io.BufferedReader;
 import java.io.IOException;

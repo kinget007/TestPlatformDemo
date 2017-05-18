@@ -7,9 +7,7 @@ import org.springframework.stereotype.Service;
 import javax.inject.Inject;
 import java.util.List;
 
-/**
- * Created by king.yu on 2016/12/16.
- */
+
 @Service
 public class ActivityLogImpl implements ActivityLogService {
     @Inject

@@ -6,15 +6,6 @@ import com.king.yyl.service.utils.swagger.core.util.Json;
 import org.jongo.marshall.jackson.oid.MongoId;
 import org.jongo.marshall.jackson.oid.MongoObjectId;
 
-/**
- * Created by king.yu on 16/10/20.
- */
-
-//@JsonInclude(JsonInclude.Include.NON_NULL)
-//@JsonIgnoreProperties(ignoreUnknown = true)
-//public class ApiDoc implements Serializable {
-//
-//    private static final long serialVersionUID = 1L;
 
 public class ApiDoc{
     @MongoId
